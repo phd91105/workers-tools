@@ -1,1 +1,1 @@
-export * from "./fshare";
+export * from './fshare';

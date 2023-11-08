@@ -1,21 +1,32 @@
 import {
   baseURL,
   fshareApiUrl,
-  fshareAccount,
   commonHeaders,
-} from "../configs";
-import { Env, FshareFile } from "../interfaces";
-import { ENV, SESSION_KEY, TOKEN_KEY } from "../../LoadEnv";
+  getFolderURL,
+} from '../contants';
+import {
+  Env,
+  FshareAuthResponse,
+  FshareFile,
+  FshareFileResponse,
+} from '../interfaces';
+import { FS_ENV, SESSION_KEY, TOKEN_KEY } from '../contants';
 
 export const FshareServices = () => {
   const login = async (env: Env) => {
+    const fshareEnv = JSON.parse(await env.FS.get(FS_ENV));
+
     const response = await fetch(baseURL + fshareApiUrl.login, {
-      method: "post",
-      body: JSON.stringify(fshareAccount),
-      headers: commonHeaders,
+      method: 'post',
+      body: JSON.stringify({
+        user_email: fshareEnv.EMAIL,
+        password: fshareEnv.PASSWORD,
+        app_key: fshareEnv.APP_KEY,
+      }),
+      headers: commonHeaders(fshareEnv.USER_AGENT),
     });
 
-    const data: { token: string; session_id: string } = await response.json();
+    const data: FshareAuthResponse = await response.json();
     await Promise.all([
       env.FS.put(TOKEN_KEY, data.token),
       env.FS.put(SESSION_KEY, data.session_id),
@@ -25,14 +36,20 @@ export const FshareServices = () => {
   };
 
   const refreshToken = async (env: Env) => {
-    const token = await env.FS.get(TOKEN_KEY);
+    const [token, fshareEnv] = await Promise.all([
+      env.FS.get(TOKEN_KEY),
+      env.FS.get(FS_ENV),
+    ]);
+
+    const fshareEnvJson = JSON.parse(fshareEnv);
+
     const response = await fetch(baseURL + fshareApiUrl.refreshToken, {
-      method: "post",
-      body: JSON.stringify({ token, app_key: ENV.APP_KEY }),
-      headers: commonHeaders,
+      method: 'post',
+      body: JSON.stringify({ token, app_key: fshareEnvJson.APP_KEY }),
+      headers: commonHeaders(fshareEnvJson.USER_AGENT),
     });
 
-    const data: { token: string; session_id: string } = await response.json();
+    const data: FshareAuthResponse = await response.json();
     await Promise.all([
       env.FS.put(TOKEN_KEY, data.token),
       env.FS.put(SESSION_KEY, data.session_id),
@@ -48,16 +65,38 @@ export const FshareServices = () => {
     ]);
 
     const response = await fetch(baseURL + fshareApiUrl.download, {
-      method: "post",
+      method: 'post',
       body: JSON.stringify({
         ...file,
         token,
         zipflag: 0,
       }),
-      headers: { ...commonHeaders, Cookie: `session_id=${sessionId}` },
+      headers: {
+        ...commonHeaders,
+        Cookie: `session_id=${sessionId}`,
+      },
     });
 
-    const data: { location: string } = await response.json();
+    const data: FshareFileResponse = await response.json();
+
+    return data;
+  };
+
+  const getFolder = async (code: string, env: Env) => {
+    const fshareEnv = JSON.parse(await env.FS.get(FS_ENV));
+
+    const response = await fetch(
+      `${getFolderURL}${fshareApiUrl.getFolder}?` +
+        new URLSearchParams({ linkcode: code, sort: 'type,name' }).toString(),
+      {
+        method: 'get',
+        headers: {
+          ...commonHeaders(fshareEnv.USER_AGENT),
+        },
+      },
+    );
+
+    const data = await response.json();
 
     return data;
   };
@@ -66,5 +105,6 @@ export const FshareServices = () => {
     login,
     refreshToken,
     getLink,
+    getFolder,
   };
 };

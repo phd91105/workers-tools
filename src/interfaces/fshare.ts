@@ -8,7 +8,9 @@ export type FshareFile = {
   password?: string;
 };
 
-export type FshareAuth = {
+export type FshareAuthResponse = {
   token?: string;
   session_id?: string;
 };
+
+export type FshareFileResponse = { location: string };

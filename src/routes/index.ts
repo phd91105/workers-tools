@@ -1,44 +1,48 @@
-import { makeJSONResponse } from "../utils";
-import { getFileFshare, loginFshare, refreshTokenFshare } from "../controllers";
-import { Env } from "../interfaces";
+import { Router } from '../handlers';
+import {
+  fshareApiController,
+  aiApiController,
+  filmApiController,
+} from '../controllers/api';
+import { RouteRequest } from '../interfaces';
+import { HttpStatus } from '../enums';
+import * as fsController from '../controllers';
+import * as assets from '../controllers/assets';
 
-/**
- * @param {Request} request
- * @return {Promise<Response>}
- */
-export async function handleRequest(
-  request: Request,
-  env: Env
-): Promise<Response> {
-  const { pathname } = new URL(request.url);
-  if (pathname === `/fshare/login`) {
-    const data = await loginFshare(env);
+const router = new Router();
 
-    return makeJSONResponse(data);
-  }
+// fs api
+router.get('/fshare/login', () => fshareApiController.loginFshare(router.env));
+router.get('/fshare/refresh', () =>
+  fshareApiController.refreshTokenFshare(router.env),
+);
+router.post('/fshare/getFile', ({ request }: RouteRequest) =>
+  fshareApiController.getFileFshare(request, router.env),
+);
+router.post('/fshare/getFolder', ({ request }: RouteRequest) =>
+  fshareApiController.getFolderFshare(request, router.env),
+);
 
-  if (pathname === `/fshare/refresh`) {
-    const data = await refreshTokenFshare(env);
+// film api
+router.post('/film/search', ({ request }: RouteRequest) =>
+  filmApiController.search(request, router.env),
+);
 
-    return makeJSONResponse(data);
-  }
+// web
+router.get('/', fsController.home);
+router.get('/assets/js/main.js', assets.js);
+router.get('/assets/css/style.css', assets.css);
 
-  if (pathname === `/fshare/getFile`) {
-    const data = await getFileFshare(
-      {
-        url: "https://www.fshare.vn/file/KEZJE3YDOYIG",
-        password: "",
-      },
-      env
-    );
+router.post('/ai', ({ request }: RouteRequest) =>
+  aiApiController.chat(request, router.env),
+);
 
-    return makeJSONResponse(data);
-  }
+// not found
+router.all('*', () =>
+  Response.json(
+    { code: HttpStatus.NOT_FOUND, error: HttpStatus[404] },
+    { status: HttpStatus.NOT_FOUND },
+  ),
+);
 
-  return makeJSONResponse(
-    {
-      error: `Not found router for [${pathname}]`,
-    },
-    { status: 404 }
-  );
-}
+export default router;

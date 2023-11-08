@@ -1,14 +1,20 @@
 {
    "name": "fshare",
-   "version": "23.10.10",
+   "version": "23.11.09",
    "private": true,
    "main": "index.ts",
    "scripts": {
       "dev": "wrangler dev",
-      "deploy": "wrangler deploy"
+      "deploy": "wrangler deploy",
+      "format": "prettier --write \"src/**/*.ts\""
    },
    "devDependencies": {
-      "@cloudflare/workers-types": "4",
-      "wrangler": "3"
+      "@cloudflare/ai": "^1.0.23",
+      "@cloudflare/workers-types": "^4.20231025.0",
+      "@typescript-eslint/eslint-plugin": "^6.10.0",
+      "@typescript-eslint/parser": "^6.10.0",
+      "eslint": "^8.53.0",
+      "prettier": "^3.0.3",
+      "wrangler": "^3.15.0"
    }
 }
