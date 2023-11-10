@@ -1,9 +1,12 @@
 import { Router } from '../handlers';
-import { fshareApiController, filmApiController } from '../controllers/api';
+import {
+  fshareApiController,
+  filmApiController,
+  googleApiController,
+} from '../controllers/api';
 import { RouteRequest } from '../interfaces';
 import { HttpStatus } from '../enums';
 import * as fsController from '../controllers';
-import * as assets from '../controllers/assets';
 
 class MyRouter {
   private router: Router;
@@ -30,13 +33,16 @@ class MyRouter {
 
     // film api
     this.router.post('/film/search', ({ request }: RouteRequest) =>
-      filmApiController.search(request, this.router.env),
+      filmApiController.search(request),
     );
 
     // web
     this.router.get('/', fsController.home);
-    this.router.get('/assets/js/main.js', assets.js);
-    this.router.get('/assets/css/style.css', assets.css);
+
+    // gg search
+    this.router.post('/google/search', ({ request }: RouteRequest) =>
+      googleApiController.search(request),
+    );
 
     // not found
     this.router.all('*', () =>

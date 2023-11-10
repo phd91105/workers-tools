@@ -17,3 +17,17 @@ export const commonHeaders = (ua: string) => ({
   'content-type': 'application/json; charset=utf-8',
   'user-agent': ua,
 });
+
+export const googleSearchUrl = (
+  keyword: string,
+  language = 'vi',
+  start?: number,
+) =>
+  `https://www.google.com/search?hl=${language}&q=${keyword}${
+    start != undefined ? `&start=${start}` : ''
+  }`;
+
+export const fsLinkPattern =
+  /https:\/\/www\.fshare\.vn\/(file|folder)\/[^\s&]+/;
+
+export const S40UA = 'Mozilla/5.0 (MSIE 10.0; Windows NT 6.1; Trident/5.0)';

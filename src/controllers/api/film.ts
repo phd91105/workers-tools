@@ -1,4 +1,3 @@
-import { Env } from '../../interfaces';
 import { FilmServices } from '../../services/film';
 
 export class FilmApiController {
@@ -8,7 +7,7 @@ export class FilmApiController {
     this.filmServices = new FilmServices();
   }
 
-  async search(request: Request, env?: Env) {
+  async search(request: Request) {
     const body: any = await new Response(request.body).json();
     const response = await this.filmServices.search(body.filmName);
 
