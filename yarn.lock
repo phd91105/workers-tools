@@ -7,11 +7,6 @@
   resolved "https://registry.yarnpkg.com/@aashutoshrathi/word-wrap/-/word-wrap-1.2.6.tgz#bd9154aec9983f77b3a034ecaa015c2e4201f6cf"
   integrity sha512-1Yjs2SvM8TflER/OD3cOjhWWOZb58A2t7wpE2S9XfBYTiIl+XFhQG2bjy4Pu1I+EAlCNUzRDYDdFwFYUKvXcIA==
 
-"@cloudflare/ai@^1.0.23":
-  version "1.0.23"
-  resolved "https://registry.yarnpkg.com/@cloudflare/ai/-/ai-1.0.23.tgz#c76487256d5bd284ac0a9fa6c5ab510d5e7f6da8"
-  integrity sha512-H616o6h/pnFivwAQS2Kw3TAR4ijDDGiRrZbngrPQRu5tHGS3hIJiNPYU7habUEnnZCnxTbjY3bjer35axED6Aw==
-
 "@cloudflare/kv-asset-handler@^0.2.0":
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@cloudflare/kv-asset-handler/-/kv-asset-handler-0.2.0.tgz#c9959bbd7a1c40bd7c674adae98aa8c8d0e5ca68"

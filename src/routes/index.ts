@@ -1,9 +1,5 @@
 import { Router } from '../handlers';
-import {
-  fshareApiController,
-  aiApiController,
-  filmApiController,
-} from '../controllers/api';
+import { fshareApiController, filmApiController } from '../controllers/api';
 import { RouteRequest } from '../interfaces';
 import { HttpStatus } from '../enums';
 import * as fsController from '../controllers';
@@ -32,10 +28,6 @@ router.post('/film/search', ({ request }: RouteRequest) =>
 router.get('/', fsController.home);
 router.get('/assets/js/main.js', assets.js);
 router.get('/assets/css/style.css', assets.css);
-
-router.post('/ai', ({ request }: RouteRequest) =>
-  aiApiController.chat(request, router.env),
-);
 
 // not found
 router.all('*', () =>
