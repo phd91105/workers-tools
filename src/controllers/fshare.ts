@@ -48,8 +48,6 @@ export const home = async () => {
             <button type="submit" id="create" class="btn btn-primary mt-2">Get Link</button>
             <button type="button" id="search" class="btn btn-secondary mt-2" data-toggle="modal"
                 data-target="#staticBackdrop">FilmSearch</button>
-            <button type="button" id="google" class="btn btn-info mt-2" data-toggle="modal"
-                data-target="#googleSearch">GoogleSearch</button>
             <button type="button" id="copy" class="action-btn js-textareacopybtn btn btn-success mt-2" data-id="generated"
                 disabled="disabled">Copy</button>
             <button type="button" id="download" class="action-btn btn btn-danger mt-2" disabled="disabled">Download</button>
