@@ -4,3 +4,5 @@ compatibility_date = "2023-11-08"
 kv_namespaces = [
   { binding = "FS", id = "1b32939789c043b6ac2b3a4c4ca9d2f4" }
 ]
+[triggers]
+crons = [ "0 0 * * *"]

@@ -1,17 +1,17 @@
 import { Env } from '../../interfaces';
-import { FilmServices } from '../../services';
+import { FilmServices } from '../../services/film';
 
-const filmServices = FilmServices();
+export class FilmApiController {
+  private readonly filmServices: FilmServices;
 
-export function FilmApiController() {
-  const search = async (request: Request, env?: Env) => {
+  constructor() {
+    this.filmServices = new FilmServices();
+  }
+
+  async search(request: Request, env?: Env) {
     const body: any = await new Response(request.body).json();
-    const response = await filmServices.search(body.filmName);
+    const response = await this.filmServices.search(body.filmName);
 
     return Response.json(response);
-  };
-
-  return {
-    search,
-  };
+  }
 }

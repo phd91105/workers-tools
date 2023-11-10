@@ -1,5 +1,5 @@
 import { FshareApiController } from './fshare';
 import { FilmApiController } from './film';
 
-export const fshareApiController = FshareApiController();
-export const filmApiController = FilmApiController();
+export const fshareApiController = new FshareApiController();
+export const filmApiController = new FilmApiController();

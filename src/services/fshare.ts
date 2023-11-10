@@ -12,8 +12,8 @@ import {
 } from '../interfaces';
 import { FS_ENV, SESSION_KEY, TOKEN_KEY } from '../contants';
 
-export const FshareServices = () => {
-  const login = async (env: Env) => {
+export class FshareServices {
+  async login(env: Env) {
     const fshareEnv = JSON.parse(await env.FS.get(FS_ENV));
 
     const response = await fetch(baseURL + fshareApiUrl.login, {
@@ -33,9 +33,9 @@ export const FshareServices = () => {
     ]);
 
     return data;
-  };
+  }
 
-  const refreshToken = async (env: Env) => {
+  async refreshToken(env: Env) {
     const [token, fshareEnv] = await Promise.all([
       env.FS.get(TOKEN_KEY),
       env.FS.get(FS_ENV),
@@ -56,9 +56,9 @@ export const FshareServices = () => {
     ]);
 
     return data;
-  };
+  }
 
-  const getLink = async (file: FshareFile, env: Env) => {
+  async getLink(file: FshareFile, env: Env) {
     const [token, sessionId] = await Promise.all([
       env.FS.get(TOKEN_KEY),
       env.FS.get(SESSION_KEY),
@@ -80,9 +80,9 @@ export const FshareServices = () => {
     const data: FshareFileResponse = await response.json();
 
     return data;
-  };
+  }
 
-  const getFolder = async (code: string, env: Env) => {
+  async getFolder(code: string, env: Env) {
     const fshareEnv = JSON.parse(await env.FS.get(FS_ENV));
 
     const response = await fetch(
@@ -99,12 +99,5 @@ export const FshareServices = () => {
     const data = await response.json();
 
     return data;
-  };
-
-  return {
-    login,
-    refreshToken,
-    getLink,
-    getFolder,
-  };
-};
+  }
+}

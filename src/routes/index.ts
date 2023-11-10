@@ -5,36 +5,52 @@ import { HttpStatus } from '../enums';
 import * as fsController from '../controllers';
 import * as assets from '../controllers/assets';
 
-const router = new Router();
+class MyRouter {
+  private router: Router;
 
-// fs api
-router.get('/fshare/login', () => fshareApiController.loginFshare(router.env));
-router.get('/fshare/refresh', () =>
-  fshareApiController.refreshTokenFshare(router.env),
-);
-router.post('/fshare/getFile', ({ request }: RouteRequest) =>
-  fshareApiController.getFileFshare(request, router.env),
-);
-router.post('/fshare/getFolder', ({ request }: RouteRequest) =>
-  fshareApiController.getFolderFshare(request, router.env),
-);
+  constructor() {
+    this.router = new Router();
+    this.setupRoutes();
+  }
 
-// film api
-router.post('/film/search', ({ request }: RouteRequest) =>
-  filmApiController.search(request, router.env),
-);
+  private setupRoutes(): void {
+    // fs api
+    this.router.get('/fshare/login', () =>
+      fshareApiController.loginFshare(this.router.env),
+    );
+    this.router.get('/fshare/refresh', () =>
+      fshareApiController.refreshTokenFshare(this.router.env),
+    );
+    this.router.post('/fshare/getFile', ({ request }: RouteRequest) =>
+      fshareApiController.getFileFshare(request, this.router.env),
+    );
+    this.router.post('/fshare/getFolder', ({ request }: RouteRequest) =>
+      fshareApiController.getFolderFshare(request, this.router.env),
+    );
 
-// web
-router.get('/', fsController.home);
-router.get('/assets/js/main.js', assets.js);
-router.get('/assets/css/style.css', assets.css);
+    // film api
+    this.router.post('/film/search', ({ request }: RouteRequest) =>
+      filmApiController.search(request, this.router.env),
+    );
 
-// not found
-router.all('*', () =>
-  Response.json(
-    { code: HttpStatus.NOT_FOUND, error: HttpStatus[404] },
-    { status: HttpStatus.NOT_FOUND },
-  ),
-);
+    // web
+    this.router.get('/', fsController.home);
+    this.router.get('/assets/js/main.js', assets.js);
+    this.router.get('/assets/css/style.css', assets.css);
 
-export default router;
+    // not found
+    this.router.all('*', () =>
+      Response.json(
+        { code: HttpStatus.NOT_FOUND, error: HttpStatus[404] },
+        { status: HttpStatus.NOT_FOUND },
+      ),
+    );
+  }
+
+  public getRouter(): Router {
+    return this.router;
+  }
+}
+
+const myRouter = new MyRouter();
+export default myRouter.getRouter();

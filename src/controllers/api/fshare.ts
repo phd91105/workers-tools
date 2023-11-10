@@ -1,39 +1,32 @@
 import { Env, FshareFile } from '../../interfaces';
-import { FshareServices } from '../../services';
+import { FshareServices } from '../../services/fshare';
 
-const fshareServices = FshareServices();
+export class FshareApiController {
+  private readonly fshareServices: FshareServices;
 
-export function FshareApiController() {
-  const loginFshare = async (env: Env) => {
-    const data = await fshareServices.login(env);
+  constructor() {
+    this.fshareServices = new FshareServices();
+  }
 
+  async loginFshare(env: Env) {
+    const data = await this.fshareServices.login(env);
     return Response.json(data);
-  };
+  }
 
-  const refreshTokenFshare = async (env: Env) => {
-    const data = await fshareServices.refreshToken(env);
-
+  async refreshTokenFshare(env: Env) {
+    const data = await this.fshareServices.refreshToken(env);
     return Response.json(data);
-  };
+  }
 
-  const getFileFshare = async (request: Request, env: Env) => {
+  async getFileFshare(request: Request, env: Env) {
     const body: FshareFile = await new Response(request.body).json();
-    const data = await fshareServices.getLink(body, env);
-
+    const data = await this.fshareServices.getLink(body, env);
     return Response.json(data);
-  };
+  }
 
-  const getFolderFshare = async (request: Request, env: Env) => {
+  async getFolderFshare(request: Request, env: Env) {
     const body: { code: string } = await new Response(request.body).json();
-    const data = await fshareServices.getFolder(body.code, env);
-
+    const data = await this.fshareServices.getFolder(body.code, env);
     return Response.json(data);
-  };
-
-  return {
-    loginFshare,
-    refreshTokenFshare,
-    getFileFshare,
-    getFolderFshare,
-  };
+  }
 }

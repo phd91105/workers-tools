@@ -1,17 +1,10 @@
-export const FilmServices = () => {
-  const search = async (keyword: string) => {
+export class FilmServices {
+  async search(keyword: string) {
     const response = await fetch(
-      'https://thuvienhd.com?feed=timfsharejson&search=' + keyword,
-      {
-        method: 'get',
-      },
+      `https://thuvienhd.com?feed=timfsharejson&search=${keyword}`,
     );
 
-    const data: any = await response.json();
+    const data = await response.json();
     return data;
-  };
-
-  return {
-    search,
-  };
-};
+  }
+}
