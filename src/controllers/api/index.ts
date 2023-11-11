@@ -1,7 +1,3 @@
-import { FshareApiController } from './fshare';
-import { FilmApiController } from './film';
-import { GoogleApiController } from './google';
-
-export const fshareApiController = new FshareApiController();
-export const filmApiController = new FilmApiController();
-export const googleApiController = new GoogleApiController();
+export * as filmApiController from './film';
+export * as fshareApiController from './fshare';
+export * as googleApiController from './google';

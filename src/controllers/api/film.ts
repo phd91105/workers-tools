@@ -1,16 +1,15 @@
-import { FilmServices } from '../../services/film';
+import { type ContextWithBody, type Next } from 'cloudworker-router';
 
-export class FilmApiController {
-  private readonly filmServices: FilmServices;
+import { type Env } from '../../interfaces';
+import { filmServices } from '../../services';
 
-  constructor() {
-    this.filmServices = new FilmServices();
-  }
-
-  async search(request: Request) {
-    const body: any = await new Response(request.body).json();
-    const response = await this.filmServices.search(body.filmName);
-
+export async function search(ctx: ContextWithBody<Env>, next: Next) {
+  try {
+    const response = await filmServices.search(ctx.body.filmName, ctx.env);
     return Response.json(response);
+  } catch (error) {
+    ctx.state.error = error;
+
+    return await next();
   }
 }

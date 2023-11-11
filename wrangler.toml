@@ -1,8 +1,15 @@
-name = "fshare"
+name = "tools"
 main = "src/index.ts"
 compatibility_date = "2023-11-08"
+
 kv_namespaces = [
   { binding = "FS", id = "1b32939789c043b6ac2b3a4c4ca9d2f4" }
 ]
+
+[[ d1_databases ]]
+binding = "DB"
+database_name = "film"
+database_id = "cc7f470e-8ad2-48b3-ba44-e1b69fa126bb"
+
 [triggers]
 crons = [ "0 */4 * * *"]

@@ -1,1 +1,1 @@
-export * from './fshare';
+export * as fsController from './fshare';

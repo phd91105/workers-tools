@@ -1,32 +1,51 @@
-import { Env, FshareFile } from '../../interfaces';
-import { FshareServices } from '../../services/fshare';
+import { type ContextWithBody, type Next } from 'cloudworker-router';
 
-export class FshareApiController {
-  private readonly fshareServices: FshareServices;
+import { type Env } from '../../interfaces';
+import { fshareServices } from '../../services';
 
-  constructor() {
-    this.fshareServices = new FshareServices();
-  }
-
-  async loginFshare(env: Env) {
-    const data = await this.fshareServices.login(env);
+export async function loginFshare(ctx: ContextWithBody<Env>, next: Next) {
+  try {
+    const data = await fshareServices.login(ctx.env);
     return Response.json(data);
-  }
+  } catch (error) {
+    ctx.state.error = error;
 
-  async refreshTokenFshare(env: Env) {
-    const data = await this.fshareServices.refreshToken(env);
-    return Response.json(data);
+    return await next();
   }
+}
 
-  async getFileFshare(request: Request, env: Env) {
-    const body: FshareFile = await new Response(request.body).json();
-    const data = await this.fshareServices.getLink(body, env);
+export async function refreshTokenFshare(
+  ctx: ContextWithBody<Env>,
+  next: Next,
+) {
+  try {
+    const data = await fshareServices.refreshToken(ctx.env);
     return Response.json(data);
+  } catch (error) {
+    ctx.state.error = error;
+
+    return await next();
   }
+}
 
-  async getFolderFshare(request: Request, env: Env) {
-    const body: { code: string } = await new Response(request.body).json();
-    const data = await this.fshareServices.getFolder(body.code, env);
+export async function getFileFshare(ctx: ContextWithBody<Env>, next: Next) {
+  try {
+    const data = await fshareServices.getLink(ctx.body, ctx.env);
     return Response.json(data);
+  } catch (error) {
+    ctx.state.error = error;
+
+    return await next();
+  }
+}
+
+export async function getFolderFshare(ctx: ContextWithBody<Env>, next: Next) {
+  try {
+    const data = await fshareServices.getFolder(ctx.body.code);
+    return Response.json(data);
+  } catch (error) {
+    ctx.state.error = error;
+
+    return await next();
   }
 }

@@ -1,37 +1,19 @@
-import { GoogleServices } from '../../services/google';
+import { type ContextWithBody, type Next } from 'cloudworker-router';
 
-export class GoogleApiController {
-  private readonly googleServices: GoogleServices;
+import { type Env } from '../../interfaces';
+import { googleServices } from '../../services';
 
-  constructor() {
-    this.googleServices = new GoogleServices();
-  }
-
-  async search(request: Request) {
-    const body: {
-      keyword: string;
-      start?: number;
-    } = await new Response(request.body).json();
-
-    const [first, next] = await Promise.all([
-      this.googleServices.search(body.keyword),
-      this.googleServices.search(body.keyword, 10),
+export async function customSearch(ctx: ContextWithBody<Env>, next: Next) {
+  try {
+    const [firstResult, nextResult] = await Promise.all([
+      googleServices.customSearch(ctx.body.keyword),
+      googleServices.customSearch(ctx.body.keyword, 10),
     ]);
 
-    return Response.json([...first, ...next]);
-  }
+    return Response.json([...firstResult, ...nextResult]);
+  } catch (error) {
+    ctx.state.error = error;
 
-  async customSearch(request: Request) {
-    const body: {
-      keyword: string;
-      start?: number;
-    } = await new Response(request.body).json();
-
-    const [first, next] = await Promise.all([
-      this.googleServices.customSearch(body.keyword),
-      this.googleServices.customSearch(body.keyword, 10),
-    ]);
-
-    return Response.json([...first, ...next]);
+    return await next();
   }
 }

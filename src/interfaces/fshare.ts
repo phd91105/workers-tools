@@ -1,16 +1,18 @@
-export type FshareAccount = {
+export interface FshareAccount {
   user_email?: string;
   password?: string;
-};
+}
 
-export type FshareFile = {
+export interface FshareFile {
   url?: string;
   password?: string;
-};
+}
 
-export type FshareAuthResponse = {
+export interface FshareAuthResponse {
   token?: string;
   session_id?: string;
-};
+}
 
-export type FshareFileResponse = { location: string };
+export interface FshareFileResponse {
+  location: string;
+}
