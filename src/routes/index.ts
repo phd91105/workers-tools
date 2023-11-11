@@ -43,6 +43,9 @@ class MyRouter {
     this.router.post('/google/search', ({ request }: RouteRequest) =>
       googleApiController.search(request),
     );
+    this.router.post('/google/customSearch', ({ request }: RouteRequest) =>
+      googleApiController.customSearch(request),
+    );
 
     // not found
     this.router.all('*', () =>

@@ -351,7 +351,7 @@ export const home = () => {
   
             $.fn.main.showLoading($ggSearchBtn);
             $.ajax({
-              url: "/google/search",
+              url: "/google/customSearch",
               type: "POST",
               contentType: "application/json",
               data: JSON.stringify({ keyword: query }),

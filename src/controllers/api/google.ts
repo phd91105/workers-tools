@@ -20,4 +20,18 @@ export class GoogleApiController {
 
     return Response.json([...first, ...next]);
   }
+
+  async customSearch(request: Request) {
+    const body: {
+      keyword: string;
+      start?: number;
+    } = await new Response(request.body).json();
+
+    const [first, next] = await Promise.all([
+      this.googleServices.customSearch(body.keyword),
+      this.googleServices.customSearch(body.keyword, 10),
+    ]);
+
+    return Response.json([...first, ...next]);
+  }
 }

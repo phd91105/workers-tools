@@ -1,5 +1,10 @@
 import { load } from 'cheerio';
-import { S40UA, fsLinkPattern, googleSearchUrl } from '../contants';
+import {
+  S40UA,
+  fsLinkPattern,
+  googleCustomSearch,
+  googleSearchUrl,
+} from '../contants';
 
 export class GoogleServices {
   async search(keyword: string, start?: number) {
@@ -24,5 +29,12 @@ export class GoogleServices {
     });
 
     return results;
+  }
+
+  async customSearch(keyword: string, start?: number) {
+    const response = await fetch(googleCustomSearch(keyword, start));
+    const { items } = await response.json();
+
+    return items ?? [];
   }
 }
