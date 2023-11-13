@@ -3,48 +3,63 @@ import { type ContextWithBody, type Next } from 'cloudworker-router';
 import { type Env } from '../../interfaces';
 import { fshareServices } from '../../services';
 
-export async function loginFshare(ctx: ContextWithBody<Env>, next: Next) {
+/**
+ * Login to FShare.
+ */
+export async function loginFshare(context: ContextWithBody<Env>, next: Next) {
   try {
-    const data = await fshareServices.login(ctx.env);
+    const data = await fshareServices.login(context.env);
     return Response.json(data);
   } catch (error) {
-    ctx.state.error = error;
+    context.state.error = error;
 
     return await next();
   }
 }
 
+/**
+ * Refresh FShare access token.
+ */
 export async function refreshTokenFshare(
-  ctx: ContextWithBody<Env>,
+  context: ContextWithBody<Env>,
   next: Next,
 ) {
   try {
-    const data = await fshareServices.refreshToken(ctx.env);
+    const data = await fshareServices.refreshToken(context.env);
     return Response.json(data);
   } catch (error) {
-    ctx.state.error = error;
+    context.state.error = error;
 
     return await next();
   }
 }
 
-export async function getFileFshare(ctx: ContextWithBody<Env>, next: Next) {
+/**
+ * Get a link for a file from FShare.
+ */
+export async function getFileFshare(context: ContextWithBody<Env>, next: Next) {
   try {
-    const data = await fshareServices.getLink(ctx.body, ctx.env);
+    const data = await fshareServices.getLink(context.body, context.env);
     return Response.json(data);
   } catch (error) {
-    ctx.state.error = error;
+    context.state.error = error;
 
     return await next();
   }
 }
 
-export async function getFolderFshare(ctx: ContextWithBody<Env>, next: Next) {
+/**
+ * Get information about a folder from FShare.
+ */
+export async function getFolderFshare(
+  context: ContextWithBody<Env>,
+  next: Next,
+) {
   try {
-    const data = await fshareServices.getFolder(ctx.body.code);
+    const data = await fshareServices.getFolder(context.body.code);
     return Response.json(data);
   } catch (error) {
-    ctx.state.error = error;
+    context.state.error = error;
 
     return await next();
   }

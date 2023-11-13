@@ -1,9 +1,16 @@
 {
+  "ignorePatterns": ["**/*.d.ts"],
   "env": {
     "browser": true,
-    "es2021": true
+    "es2021": true,
+    "node": true
   },
-  "extends": ["standard-with-typescript", "prettier"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ],
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": "latest",
     "sourceType": "module"
@@ -15,21 +22,17 @@
     "prettier"
   ],
   "rules": {
-    "no-undef": "off",
-    "@typescript-eslint/semi": "off",
-    "@typescript-eslint/no-unused-vars": "off",
-    "@typescript-eslint/no-explicit-any": "error",
-    "@typescript-eslint/interface-name-prefix": "off",
-    "@typescript-eslint/explicit-function-return-type": "off",
-    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      { "argsIgnorePattern": "^", "varsIgnorePattern": "^" }
+    ],
     "@typescript-eslint/no-non-null-assertion": "off",
-    "@typescript-eslint/strict-boolean-expressions": "off",
-    "@typescript-eslint/restrict-template-expressions": "off",
-    "@typescript-eslint/space-before-function-paren": "off",
-    "@typescript-eslint/naming-convention": "off",
+    "@typescript-eslint/no-explicit-any": "error",
     "prettier/prettier": ["error"],
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error",
+    "no-fallthrough": "off",
+    "no-useless-catch": "off",
     "unused-imports/no-unused-imports": "error",
     "unused-imports/no-unused-vars": [
       "warn",
@@ -40,7 +43,5 @@
         "argsIgnorePattern": "^_"
       }
     ]
-  },
-  "root": true,
-  "ignorePatterns": ["**/*.d.ts"]
+  }
 }

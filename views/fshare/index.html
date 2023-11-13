@@ -450,7 +450,10 @@
           $('#create').on('click', function (e) {
             if ((e.preventDefault(), !$('#mainForm').valid())) return;
 
-            const originalUrl = $('#original').val();
+            let originalUrl = $('#original').val();
+            if (originalUrl.endsWith("/")) {
+              originalUrl = originalUrl.slice(0, -1);
+            }
             const fileId = originalUrl.split('?')[0].split('/').pop();
             const apiUrl = `https://www.fshare.vn/${
               fshareFileRegex.test(originalUrl) ? 'file' : 'folder'

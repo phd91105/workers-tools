@@ -14,6 +14,9 @@ import {
   type FshareFileResponse,
 } from '../interfaces';
 
+/**
+ * Perform a login operation to FShare.
+ */
 export async function login(env: Env) {
   const fshareEnv = await env.FS.get(FS_ENV);
   const fshareEnvJson = JSON.parse(fshareEnv!);
@@ -37,6 +40,9 @@ export async function login(env: Env) {
   return data;
 }
 
+/**
+ * Refresh the FShare access token.
+ */
 export async function refreshToken(env: Env) {
   const [token, fshareEnv] = await Promise.all([
     env.FS.get(TOKEN_KEY),
@@ -60,6 +66,9 @@ export async function refreshToken(env: Env) {
   return data;
 }
 
+/**
+ * Get a download link for a file from FShare.
+ */
 export async function getLink(file: FshareFile, env: Env) {
   const [token, sessionId] = await Promise.all([
     env.FS.get(TOKEN_KEY),
@@ -84,6 +93,9 @@ export async function getLink(file: FshareFile, env: Env) {
   return data;
 }
 
+/**
+ * Get information about a folder from FShare.
+ */
 export async function getFolder(code: string) {
   const response = await fetch(
     `${getFolderURL}${fshareApiUrl.getFolder}?` +

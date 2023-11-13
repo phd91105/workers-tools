@@ -11,21 +11,37 @@ import { type Env } from './interfaces';
 
 const router = new Router<Env>();
 
+/**
+ * Use the body parser middleware to parse the request body.
+ */
 router.use(bodyparser);
 
-// fs api
-router.get('/fshare/login', fshareApiController.loginFshare);
-router.get('/fshare/refresh', fshareApiController.refreshTokenFshare);
+/**
+ * fshare web routers
+ */
+router.get('/fshare', fsController.index);
+
+/**
+ * fshare api routers
+ */
 router.post('/fshare/getFile', fshareApiController.getFileFshare);
 router.post('/fshare/getFolder', fshareApiController.getFolderFshare);
-// fshare web
-router.get('/fshare', fsController.index);
-// film api
+router.get('/fshare/login', fshareApiController.loginFshare);
+router.get('/fshare/refresh', fshareApiController.refreshTokenFshare);
+
+/**
+ * film api routers
+ */
 router.post('/film/search', filmApiController.search);
-// gg search
+
+/**
+ * google search api routers
+ */
 router.post('/google/customSearch', googleApiController.customSearch);
 
-// error handler
+/**
+ * error handler
+ */
 router.use(errorsHandler);
 
 export default router;

@@ -1,5 +1,7 @@
+/**
+ * Remove accents from Vietnamese characters
+ */
 export const removeDiacritics = (str: string) => {
-  // Remove accents from Vietnamese characters
   str = str.toLowerCase();
   str = str.replace(/[àáạảãâầấậẩẫăằắặẳẵ]/g, 'a');
   str = str.replace(/[èéẹẻẽêềếệểễ]/g, 'e');
@@ -14,4 +16,7 @@ export const removeDiacritics = (str: string) => {
   return str;
 };
 
+/**
+ * Remove single quote from string
+ */
 export const removeQuote = (str: string) => str.replace(/'/g, '');

@@ -6,6 +6,9 @@ import {
   removeQuote,
 } from '../utils';
 
+/**
+ * Find all films based on a cleaned keyword.
+ */
 export async function findAll(cleanKeyword: string, env: Env) {
   const { results: films } = await env.DB.prepare(
     buildSelectQuery({
@@ -50,6 +53,9 @@ export async function findAll(cleanKeyword: string, env: Env) {
   return result;
 }
 
+/**
+ * Bulk create films and their details in the database.
+ */
 export async function bulkCreate(
   data: FilmResponse,
   cleanKeyword: string,
@@ -75,6 +81,9 @@ export async function bulkCreate(
   ]);
 }
 
+/**
+ * Process insert values for bulk creation in the database.
+ */
 export const processInsertValues = (
   data: FilmResponse,
   cleanKeyword: string,
