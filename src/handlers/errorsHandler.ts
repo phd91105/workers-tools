@@ -1,6 +1,5 @@
 import { type Context } from 'cloudworker-router';
 
-import notFound from '../../views/errors/notFound.html';
 import { HttpStatus } from '../enums';
 import { type Env } from '../interfaces';
 
@@ -16,11 +15,4 @@ export const errorsHandler = async (context: Context<Env>) => {
       { status: HttpStatus.BAD_REQUEST },
     );
   }
-
-  return new Response(notFound, {
-    status: HttpStatus.NOT_FOUND,
-    headers: {
-      'content-type': 'text/html',
-    },
-  });
 };

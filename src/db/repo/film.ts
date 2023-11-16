@@ -1,10 +1,10 @@
-import { type Env, type FilmResponse } from '../interfaces';
+import { type Env, type FilmResponse } from '../../interfaces';
 import {
   buildInsertOrUpdateQuery,
   buildSelectQuery,
   removeDiacritics,
   removeQuote,
-} from '../utils';
+} from '../../utils';
 
 /**
  * Find all films based on a cleaned keyword.

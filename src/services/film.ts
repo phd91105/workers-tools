@@ -1,6 +1,6 @@
 import { thuvienhdUrl } from '../contants';
+import { filmRepository } from '../db/repo';
 import { type Env, type FilmResponse } from '../interfaces';
-import { filmRepository } from '../repositories';
 import { removeDiacritics } from '../utils';
 
 /**

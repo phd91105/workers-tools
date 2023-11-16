@@ -6,7 +6,7 @@ import {
   fshareApiController,
   googleApiController,
 } from './controllers/api';
-import { errorsHandler } from './handlers';
+import { assetsHandler, errorsHandler } from './handlers';
 import { type Env } from './interfaces';
 
 const router = new Router<Env>();
@@ -38,6 +38,11 @@ router.post('/film/search', filmApiController.search);
  * google search api routers
  */
 router.post('/google/customSearch', googleApiController.customSearch);
+
+/**
+ * Handle public files
+ */
+router.all('*', assetsHandler);
 
 /**
  * error handler

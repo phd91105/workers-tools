@@ -1,5 +1,5 @@
 {
-  "ignorePatterns": ["**/*.d.ts"],
+  "ignorePatterns": ["**/*.d.ts", "public/*"],
   "env": {
     "browser": true,
     "es2021": true,
