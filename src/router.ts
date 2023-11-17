@@ -1,13 +1,13 @@
 import { bodyparser, Router } from 'cloudworker-router';
 
-import { fsController } from './controllers';
+import { apiController, webController } from '@/controllers';
 import {
-  filmApiController,
-  fshareApiController,
-  googleApiController,
-} from './controllers/api';
-import { assetsHandler, errorsHandler } from './handlers';
-import { type Env } from './interfaces';
+  allowedMethod,
+  assetHandler,
+  errorHandler,
+  proxyHandler,
+} from '@/middlewares';
+import { Env } from '@/types';
 
 const router = new Router<Env>();
 
@@ -19,34 +19,51 @@ router.use(bodyparser);
 /**
  * fshare web routers
  */
-router.get('/fshare', fsController.index);
+router.get('/fshare', allowedMethod, webController.fshare.index);
 
 /**
  * fshare api routers
  */
-router.post('/fshare/getFile', fshareApiController.getFileFshare);
-router.post('/fshare/getFolder', fshareApiController.getFolderFshare);
-router.get('/fshare/login', fshareApiController.loginFshare);
-router.get('/fshare/refresh', fshareApiController.refreshTokenFshare);
+router.post(
+  '/fshare/getFile',
+  allowedMethod,
+  apiController.fshare.getFileFshare,
+);
+router.post(
+  '/fshare/getFolder',
+  allowedMethod,
+  apiController.fshare.getFolderFshare,
+);
+router.get('/fshare/login', apiController.fshare.loginFshare);
+router.get('/fshare/refresh', apiController.fshare.refreshTokenFshare);
 
 /**
  * film api routers
  */
-router.post('/film/search', filmApiController.search);
+router.post('/film/search', allowedMethod, apiController.film.search);
 
 /**
  * google search api routers
  */
-router.post('/google/customSearch', googleApiController.customSearch);
+router.post(
+  '/google/customSearch',
+  allowedMethod,
+  apiController.google.customSearch,
+);
+
+/**
+ * Proxy handler
+ */
+router.get('/proxy/:link*', allowedMethod, proxyHandler);
 
 /**
  * Handle public files
  */
-router.all('*', assetsHandler);
+router.use(assetHandler);
 
 /**
- * error handler
+ * Error handler
  */
-router.use(errorsHandler);
+router.use(errorHandler);
 
 export default router;

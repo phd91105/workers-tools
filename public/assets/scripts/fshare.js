@@ -129,7 +129,8 @@ $.fn.extend({
                 ($.fn.main.hideLoading($createBtn, 'Get Link'),
                 !response.location)
               ) {
-                $('.action-btn').prop('disabled', 'disabled');
+                $('.action-btn').prop('hidden', 'hidden');
+                $('.js-textareacopybtn').prop('disabled', 'disabled');
                 let errorMsg = '';
                 switch (response.code) {
                   case 123:
@@ -152,7 +153,8 @@ $.fn.extend({
                   $('#generated').val().split('/').pop(),
                 )}</span>`,
               );
-              $('.action-btn').removeAttr('disabled');
+              $('.action-btn').removeAttr('hidden');
+              $('.js-textareacopybtn').removeAttr('disabled');
             },
           });
         } else if (fshareFolderRegex.test(apiUrl)) {

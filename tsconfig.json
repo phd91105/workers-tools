@@ -6,10 +6,14 @@
     "moduleResolution": "Node",
     "allowJs": false,
     "strict": true,
-    "sourceMap": true,
+    "sourceMap": false,
     "typeRoots": ["node_modules"],
-    "types": ["@cloudflare/workers-types"]
+    "types": ["@cloudflare/workers-types"],
+    "paths": {
+      "@/*": ["./src/*"],
+      "@views": ["./views/index.ts"]
+    }
   },
-  "include": ["**/*.ts"],
+  "include": ["**/*.ts", "views"],
   "exclude": ["node_modules"]
 }

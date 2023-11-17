@@ -1,3 +1,3 @@
-export * as filmApiController from './film';
-export * as fshareApiController from './fshare';
-export * as googleApiController from './google';
+export * as film from './film';
+export * as fshare from './fshare';
+export * as google from './google';

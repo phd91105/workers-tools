@@ -1,7 +1,7 @@
-import { type ContextWithBody, type Next } from 'cloudworker-router';
+import { ContextWithBody, Next } from 'cloudworker-router';
 
-import { type Env } from '../../interfaces';
-import { googleServices } from '../../services';
+import { googleServices } from '@/services';
+import { Env } from '@/types';
 
 /**
  * Perform a custom search using the Google Services.
@@ -13,10 +13,12 @@ export async function customSearch(context: ContextWithBody<Env>, next: Next) {
       googleServices.customSearch(context.body.keyword, 10),
     ]);
 
-    return Response.json([...firstResult, ...nextResult]);
+    return Response.json([...firstResult, ...nextResult], {
+      headers: context.headers,
+    });
   } catch (error) {
     context.state.error = error;
 
-    return await next();
+    return next();
   }
 }

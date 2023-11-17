@@ -1,7 +1,7 @@
-import { thuvienhdUrl } from '../contants';
-import { filmRepository } from '../db/repo';
-import { type Env, type FilmResponse } from '../interfaces';
-import { removeDiacritics } from '../utils';
+import { thuvienhdUrl } from '@/contants';
+import { filmRepository } from '@/db/repo';
+import { Env, FilmResponse } from '@/types';
+import { removeDiacritics } from '@/utils';
 
 /**
  * Search for films based on a keyword.

@@ -6,13 +6,13 @@ import {
   getFolderURL,
   SESSION_KEY,
   TOKEN_KEY,
-} from '../contants';
+} from '@/contants';
 import {
-  type Env,
-  type FshareAuthResponse,
-  type FshareFile,
-  type FshareFileResponse,
-} from '../interfaces';
+  Env,
+  FshareAuthResponse,
+  FshareFile,
+  FshareFileResponse,
+} from '@/types';
 
 /**
  * Perform a login operation to FShare.

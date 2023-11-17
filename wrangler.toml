@@ -13,4 +13,4 @@ database_name = "film"
 database_id = "cc7f470e-8ad2-48b3-ba44-e1b69fa126bb"
 
 [triggers]
-crons = [ "0 */4 * * *"]
+crons = [ "0 */6 * * *"]

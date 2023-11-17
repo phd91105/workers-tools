@@ -1,4 +1,4 @@
-import { googleCustomSearch } from '../contants';
+import { googleCustomSearch } from '@/contants';
 
 /**
  * Perform a custom search using the Google Custom Search API.

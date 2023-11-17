@@ -1,7 +1,7 @@
-import { type ContextWithBody, type Next } from 'cloudworker-router';
+import { ContextWithBody, Next } from 'cloudworker-router';
 
-import { type Env } from '../../interfaces';
-import { fshareServices } from '../../services';
+import { fshareServices } from '@/services';
+import { Env } from '@/types';
 
 /**
  * Login to FShare.
@@ -13,7 +13,7 @@ export async function loginFshare(context: ContextWithBody<Env>, next: Next) {
   } catch (error) {
     context.state.error = error;
 
-    return await next();
+    return next();
   }
 }
 
@@ -30,7 +30,7 @@ export async function refreshTokenFshare(
   } catch (error) {
     context.state.error = error;
 
-    return await next();
+    return next();
   }
 }
 
@@ -40,11 +40,11 @@ export async function refreshTokenFshare(
 export async function getFileFshare(context: ContextWithBody<Env>, next: Next) {
   try {
     const data = await fshareServices.getLink(context.body, context.env);
-    return Response.json(data);
+    return Response.json(data, { headers: context.headers });
   } catch (error) {
     context.state.error = error;
 
-    return await next();
+    return next();
   }
 }
 
@@ -57,10 +57,10 @@ export async function getFolderFshare(
 ) {
   try {
     const data = await fshareServices.getFolder(context.body.code);
-    return Response.json(data);
+    return Response.json(data, { headers: context.headers });
   } catch (error) {
     context.state.error = error;
 
-    return await next();
+    return next();
   }
 }

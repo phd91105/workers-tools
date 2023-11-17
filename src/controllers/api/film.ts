@@ -1,7 +1,7 @@
-import { type ContextWithBody, type Next } from 'cloudworker-router';
+import { ContextWithBody, Next } from 'cloudworker-router';
 
-import { type Env } from '../../interfaces';
-import { filmServices } from '../../services';
+import { filmServices } from '@/services';
+import { Env } from '@/types';
 
 /**
  * Search for films based on the provided film name.
@@ -12,10 +12,10 @@ export async function search(context: ContextWithBody<Env>, next: Next) {
       context.body.filmName,
       context.env,
     );
-    return Response.json(response);
+    return Response.json(response, { headers: context.headers });
   } catch (error) {
     context.state.error = error;
 
-    return await next();
+    return next();
   }
 }
