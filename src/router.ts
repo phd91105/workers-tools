@@ -57,6 +57,11 @@ router.post(
 router.get('/proxy/:link*', allowedMethod, proxyHandler);
 
 /**
+ * Proxy handler
+ */
+router.post('/getZipped', allowedMethod, apiController.zip.getZipped);
+
+/**
  * Handle public files
  */
 router.use(assetHandler);

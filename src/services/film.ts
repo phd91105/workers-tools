@@ -1,7 +1,9 @@
+import axios from 'axios';
+
 import { thuvienhdUrl } from '@/contants';
 import { filmRepository } from '@/db/repo';
 import { Env, FilmResponse } from '@/types';
-import { removeDiacritics } from '@/utils';
+import { handleApiRequest, removeDiacritics } from '@/utils';
 
 /**
  * Search for films based on a keyword.
@@ -14,12 +16,13 @@ export async function search(keyword: string, env: Env) {
   if (dbData) return dbData;
 
   // Fetch film data from an external source.
-  const response = await fetch(thuvienhdUrl(keyword));
-  const result: { data: FilmResponse } = await response.json();
+  const filmResponse = await handleApiRequest(
+    axios.get<FilmResponse>(thuvienhdUrl(keyword)),
+  );
 
-  if (result.data) {
-    await filmRepository.bulkCreate(result.data, cleanKeyword, env);
+  if (filmResponse) {
+    await filmRepository.bulkCreate(filmResponse, cleanKeyword, env);
   }
 
-  return result;
+  return filmResponse;
 }

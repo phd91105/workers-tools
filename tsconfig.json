@@ -7,6 +7,7 @@
     "allowJs": false,
     "strict": true,
     "sourceMap": false,
+    "allowSyntheticDefaultImports": true,
     "typeRoots": ["node_modules"],
     "types": ["@cloudflare/workers-types"],
     "paths": {
