@@ -33,3 +33,6 @@ export const googleCustomSearch = (keyword: string, start?: number) =>
   }`;
 export const thuvienhdUrl = (keyword: string) =>
   `${searchFilmURL}?feed=timfsharejson&search=${keyword}`;
+
+export const githubUrl = (owner: string, repo: string) =>
+  `https://api.github.com/repos/${owner}/${repo}/commits`;

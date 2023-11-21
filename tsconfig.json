@@ -15,6 +15,6 @@
       "@views": ["./views/index.ts"]
     }
   },
-  "include": ["**/*.ts", "views"],
+  "include": ["**/*.ts", "views", "scripts/commands/pick.mjs"],
   "exclude": ["node_modules"]
 }

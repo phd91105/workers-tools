@@ -1,8 +1,6 @@
-import axios from 'axios';
-
 import { thuvienhdUrl } from '@/contants';
 import { filmRepository } from '@/db/repo';
-import { Env, FilmResponse } from '@/types';
+import { Env, FilmResponse } from '@/factory/types';
 import { handleApiRequest, removeDiacritics } from '@/utils';
 
 /**
@@ -16,8 +14,8 @@ export async function search(keyword: string, env: Env) {
   if (dbData) return dbData;
 
   // Fetch film data from an external source.
-  const filmResponse = await handleApiRequest(
-    axios.get<FilmResponse>(thuvienhdUrl(keyword)),
+  const filmResponse = await handleApiRequest<FilmResponse>(
+    fetch(thuvienhdUrl(keyword)),
   );
 
   if (filmResponse) {

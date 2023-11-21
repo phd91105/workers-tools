@@ -1,6 +1,6 @@
 import { Context, Next } from 'cloudworker-router';
 
-import { Env } from '@/types';
+import { Env } from '@/factory/types';
 import { Base64Utils, determineContentType } from '@/utils';
 
 /**
@@ -13,14 +13,21 @@ export const assetHandler = async (context: Context<Env>, next: Next) => {
 
   try {
     const path = context.params['0'];
+    const cacheTtl =
+      path.endsWith('.zip') || path.endsWith('_gen.png') ? undefined : 1800;
+
     let file: string | Blob | null = await context.env.FILE.get(path, {
-      cacheTtl: 1800,
+      cacheTtl,
     });
+
     if (!file) throw new Error('NOT_FOUND');
 
     if (path.endsWith('.zip')) {
-      await context.env.FILE.delete(path);
       file = Base64Utils.base64ToBlob(file, 'application/zip');
+      await context.env.FILE.delete(path);
+    } else if (path.endsWith('_gen.png')) {
+      file = Base64Utils.base64ToBlob(file, 'image/png');
+      await context.env.FILE.delete(path);
     }
 
     return new Response(file, {

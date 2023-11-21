@@ -1,7 +1,10 @@
-import 'dotenv/config';
+import process from 'node:process';
 
+import dotenv from 'dotenv';
 import * as fs from 'fs';
 import * as path from 'path';
+
+dotenv.config({ path: '.dev.vars' });
 
 const baseURL = 'https://api.cloudflare.com/client/v4';
 const apiKey = process.env.CLOUDFLARE_API_KEY;

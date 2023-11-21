@@ -1,6 +1,6 @@
+import { Env } from '@/factory/types';
 import router from '@/router';
 import { fshareServices } from '@/services';
-import { Env } from '@/types';
 
 /**
  * Main serverless handler for Cloudflare Workers.

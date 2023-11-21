@@ -1,6 +1,6 @@
 import { Context, Next } from 'cloudworker-router';
 
-import { Env } from '@/types';
+import { Env } from '@/factory/types';
 
 /**
  * allowedMethod

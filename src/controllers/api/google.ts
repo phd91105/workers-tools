@@ -1,7 +1,7 @@
 import { ContextWithBody, Next } from 'cloudworker-router';
 
+import { Env } from '@/factory/types';
 import { googleServices } from '@/services';
-import { Env } from '@/types';
 
 /**
  * Perform a custom search using the Google Services.

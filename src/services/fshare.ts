@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 import {
   baseURL,
   commonHeaders,
@@ -14,7 +12,7 @@ import {
   FshareAuthResponse,
   FshareFile,
   FshareFileResponse,
-} from '@/types';
+} from '@/factory/types';
 import { handleApiRequest } from '@/utils';
 
 /**
@@ -25,16 +23,16 @@ export async function login(env: Env) {
     (await env.FS.get(FS_ENV, { cacheTtl: 1800 })) ?? '{}',
   );
 
-  const data = await handleApiRequest(
-    axios.post<FshareAuthResponse>(
-      baseURL + fshareApiUrl.login,
-      {
+  const data = await handleApiRequest<FshareAuthResponse>(
+    fetch(baseURL + fshareApiUrl.login, {
+      method: 'post',
+      body: JSON.stringify({
         user_email: fshareEnv.EMAIL,
         password: fshareEnv.PASSWORD,
         app_key: fshareEnv.APP_KEY,
-      },
-      { headers: commonHeaders(fshareEnv.USER_AGENT) },
-    ),
+      }),
+      headers: commonHeaders(fshareEnv.USER_AGENT),
+    }),
   );
 
   await Promise.all([
@@ -56,12 +54,12 @@ export async function refreshToken(env: Env) {
 
   const fshareEnvJson = JSON.parse(fshareEnv!);
 
-  const data = await handleApiRequest(
-    axios.post<FshareAuthResponse>(
-      baseURL + fshareApiUrl.refreshToken,
-      { token, app_key: fshareEnvJson.APP_KEY },
-      { headers: commonHeaders(fshareEnvJson.USER_AGENT) },
-    ),
+  const data = await handleApiRequest<FshareAuthResponse>(
+    fetch(baseURL + fshareApiUrl.refreshToken, {
+      method: 'post',
+      body: JSON.stringify({ token, app_key: fshareEnvJson.APP_KEY }),
+      headers: commonHeaders(fshareEnvJson.USER_AGENT),
+    }),
   );
 
   await Promise.all([
@@ -81,17 +79,15 @@ export async function getLink(file: FshareFile, env: Env) {
     env.FS.get(SESSION_KEY, { cacheTtl: 1800 }),
   ]);
 
-  return handleApiRequest(
-    axios.post<FshareFileResponse>(
-      baseURL + fshareApiUrl.download,
-      { ...file, token, zipflag: 0 },
-      {
-        headers: {
-          ...commonHeaders(),
-          Cookie: `session_id=${sessionId}`,
-        },
+  return handleApiRequest<FshareFileResponse>(
+    fetch(baseURL + fshareApiUrl.download, {
+      method: 'post',
+      body: JSON.stringify({ ...file, token, zipflag: 0 }),
+      headers: {
+        ...commonHeaders(),
+        Cookie: `session_id=${sessionId}`,
       },
-    ),
+    }),
   );
 }
 
@@ -99,9 +95,12 @@ export async function getLink(file: FshareFile, env: Env) {
  * Get information about a folder from FShare.
  */
 export async function getFolder(code: string) {
+  const url = new URL(`${getFolderURL}${fshareApiUrl.getFolder}`);
+  url.searchParams.append('linkcode', code);
+  url.searchParams.append('sort', 'type,name');
+
   return handleApiRequest(
-    axios.get(`${getFolderURL}${fshareApiUrl.getFolder}`, {
-      params: { linkcode: code, sort: 'type,name' },
+    fetch(url, {
       headers: { ...commonHeaders() },
     }),
   );

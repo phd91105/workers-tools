@@ -7,6 +7,8 @@ kv_namespaces = [
   { binding = "FS", id = "1b32939789c043b6ac2b3a4c4ca9d2f4" }
 ]
 
+ai = { binding = "AI" }
+
 [[ d1_databases ]]
 binding = "DB"
 database_name = "film"

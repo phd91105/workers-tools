@@ -1,7 +1,7 @@
 import { ContextWithBody, Next } from 'cloudworker-router';
 
+import { Env } from '@/factory/types';
 import { zipServices } from '@/services';
-import { Env } from '@/types';
 import { Base64Utils, getCurrentDateTime } from '@/utils';
 
 export async function getZipped(context: ContextWithBody<Env>, next: Next) {

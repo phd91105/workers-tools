@@ -1,4 +1,4 @@
-import { Env, FilmResponse } from '@/types';
+import { Env, FilmResponse } from '@/factory/types';
 import {
   buildInsertOrUpdateQuery,
   buildSelectQuery,

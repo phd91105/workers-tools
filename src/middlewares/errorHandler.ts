@@ -1,8 +1,8 @@
 import { notFound } from '@views';
 import { Context, Next } from 'cloudworker-router';
 
-import { HttpStatus } from '@/enums';
-import { Env } from '@/types';
+import { HttpStatus } from '@/factory/enums';
+import { Env } from '@/factory/types';
 
 /**
  * Handle errors and generate an appropriate HTTP response.

@@ -1,13 +1,13 @@
 import { bodyparser, Router } from 'cloudworker-router';
 
-import { apiController, webController } from '@/controllers';
+import { apiController, botController, webController } from '@/controllers';
+import { Env } from '@/factory/types';
 import {
   allowedMethod,
   assetHandler,
   errorHandler,
   proxyHandler,
 } from '@/middlewares';
-import { Env } from '@/types';
 
 const router = new Router<Env>();
 
@@ -57,9 +57,19 @@ router.post(
 router.get('/proxy/:link*', allowedMethod, proxyHandler);
 
 /**
- * Proxy handler
+ * Download multiple links as zip
  */
 router.post('/getZipped', allowedMethod, apiController.zip.getZipped);
+
+/**
+ * Discord bot webhooks
+ */
+router.post('/interactions', botController.discord);
+
+/**
+ * Stable diffusion
+ */
+router.post('/image', apiController.stableDiffusion.genImage);
 
 /**
  * Handle public files

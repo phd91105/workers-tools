@@ -1,7 +1,7 @@
 import { ContextWithBody, Next } from 'cloudworker-router';
 
+import { Env } from '@/factory/types';
 import { fshareServices } from '@/services';
-import { Env } from '@/types';
 
 /**
  * Login to FShare.
