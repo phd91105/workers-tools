@@ -7,15 +7,11 @@ import { fshareServices } from '@/services';
  */
 const handler = {
   // Handle incoming HTTP requests.
-  async fetch(request: Request, env: Env, context: ExecutionContext) {
-    const response = await router.handle(request, env, context);
-    return response;
-  },
+  fetch: (request: Request, env: Env, context: ExecutionContext) =>
+    router.handle(request, env, context),
 
   // Handle scheduled intervals events.
-  async scheduled(_event: Event, env: Env) {
-    await fshareServices.refreshToken(env);
-  },
+  scheduled: (event: Event, env: Env) => fshareServices.refreshToken(env),
 };
 
 export default handler;

@@ -12,10 +12,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cloudflare/ai@npm:^1.0.30":
-  version: 1.0.30
-  resolution: "@cloudflare/ai@npm:1.0.30"
-  checksum: 4b06bf674357a12f3c1afc0209e083e29c6c27f11d50c67c89358982991aed04ba7b9cd8561b24175ef6fa301336d0bf7422bacd42e8f07df6a49f01f6ac77d1
+"@cloudflare/ai@npm:^1.0.32":
+  version: 1.0.32
+  resolution: "@cloudflare/ai@npm:1.0.32"
+  checksum: db87717376a0a944e36874876e0a19f1102bdab223fdbd2b154b9c292d6a0dc46b7f99855c5b1b7831cef88a89314abf84e270c6bb737054378cb52943d565a0
   languageName: node
   linkType: hard
 
@@ -63,10 +63,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cloudflare/workers-types@npm:^4.20231025.0":
-  version: 4.20231025.0
-  resolution: "@cloudflare/workers-types@npm:4.20231025.0"
-  checksum: b5f124948546f71a1dbe39b857a05f9c03b33676d4c022247a9111ef082a0f6bd040267d4dcc8aa6f0b564798e14614c13d75dc35b05f80a6d3f5f9552c33559
+"@cloudflare/workers-types@npm:^4.20231121.0":
+  version: 4.20231121.0
+  resolution: "@cloudflare/workers-types@npm:4.20231121.0"
+  checksum: 096729103bc02fed641a636bad501b8dd9b4f76ad25bd50b5ea32a2c4aa7d90f55c626a6abf86c20e13fe1398690667bd7428d07da972760c8d207dd8d16dcf5
   languageName: node
   linkType: hard
 
@@ -417,7 +417,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/lodash@npm:^4":
+"@types/lodash@npm:^4.14.202":
   version: 4.14.202
   resolution: "@types/lodash@npm:4.14.202"
   checksum: 6064d43c8f454170841bd67c8266cc9069d9e570a72ca63f06bceb484cb4a3ee60c9c1f305c1b9e3a87826049fd41124b8ef265c4dd08b00f6766609c7fe9973
@@ -442,12 +442,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/papaparse@npm:^5":
-  version: 5.3.12
-  resolution: "@types/papaparse@npm:5.3.12"
+"@types/papaparse@npm:^5.3.13":
+  version: 5.3.13
+  resolution: "@types/papaparse@npm:5.3.13"
   dependencies:
     "@types/node": "npm:*"
-  checksum: 40497306977ad78291be960c114c2d06a6550a99740458285cfd413f16a7dc86efc823c402dea1c0bb57f367e706c40fe63eb1f27535518b0a44163a2917a3ef
+  checksum: 333c57794d67a461194ff4c8696a18b5f234ca7feb86516b5a49738017cdd31caf3453da2d148f00dfa35b3c0532919e3b3ed1c9369240939227d938a823c351
   languageName: node
   linkType: hard
 
@@ -2615,9 +2615,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"miniflare@npm:3.20231030.0":
-  version: 3.20231030.0
-  resolution: "miniflare@npm:3.20231030.0"
+"miniflare@npm:3.20231030.1":
+  version: 3.20231030.1
+  resolution: "miniflare@npm:3.20231030.1"
   dependencies:
     acorn: "npm:^8.8.0"
     acorn-walk: "npm:^8.2.0"
@@ -2633,7 +2633,7 @@ __metadata:
     zod: "npm:^3.20.6"
   bin:
     miniflare: bootstrap.js
-  checksum: 083b6d872b5d4e4cf2ce9c3b97eb31a9d2d76d9e6a9010a3bd54938e04c2d0ededc03ad07bb6201bb5384403e2df998872751d6b6e345699f7a2d742e783f9cb
+  checksum: c2c30334e59f2811e08510dcd74e3d331fe3bd2cdd7d0f9eeb48d40db18fef1db55431570079471c17efeee1fe4c81666011272c65a7c0df06de4c4fa4f76a41
   languageName: node
   linkType: hard
 
@@ -3717,10 +3717,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "tools@workspace:."
   dependencies:
-    "@cloudflare/ai": "npm:^1.0.30"
-    "@cloudflare/workers-types": "npm:^4.20231025.0"
-    "@types/lodash": "npm:^4"
-    "@types/papaparse": "npm:^5"
+    "@cloudflare/ai": "npm:^1.0.32"
+    "@cloudflare/workers-types": "npm:^4.20231121.0"
+    "@types/lodash": "npm:^4.14.202"
+    "@types/papaparse": "npm:^5.3.13"
     "@typescript-eslint/eslint-plugin": "npm:^6.12.0"
     "@typescript-eslint/parser": "npm:^6.12.0"
     cloudworker-router: "npm:^4.1.5"
@@ -3737,7 +3737,7 @@ __metadata:
     papaparse: "npm:^5.4.1"
     prettier: "npm:^3.1.0"
     typescript: "npm:5.2.2"
-    wrangler: "npm:^3.16.0"
+    wrangler: "npm:^3.17.1"
   languageName: unknown
   linkType: soft
 
@@ -4002,9 +4002,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"wrangler@npm:^3.16.0":
-  version: 3.16.0
-  resolution: "wrangler@npm:3.16.0"
+"wrangler@npm:^3.17.1":
+  version: 3.17.1
+  resolution: "wrangler@npm:3.17.1"
   dependencies:
     "@cloudflare/kv-asset-handler": "npm:^0.2.0"
     "@esbuild-plugins/node-globals-polyfill": "npm:^0.2.3"
@@ -4013,7 +4013,7 @@ __metadata:
     chokidar: "npm:^3.5.3"
     esbuild: "npm:0.17.19"
     fsevents: "npm:~2.3.2"
-    miniflare: "npm:3.20231030.0"
+    miniflare: "npm:3.20231030.1"
     nanoid: "npm:^3.3.3"
     path-to-regexp: "npm:^6.2.0"
     resolve.exports: "npm:^2.0.2"
@@ -4027,7 +4027,7 @@ __metadata:
   bin:
     wrangler: bin/wrangler.js
     wrangler2: bin/wrangler.js
-  checksum: 76039c1155ae7ac5e2459d1fe948d5feb2615a23ca49c299b6c03e4a234c3f2d1cf7fad59a7ebb598c158e31b4ed2cde424dd3f59d6b722b3c089cd68f811ad6
+  checksum: 16323c69385a7f058cc2c8435059b77a1c23b9bd8e5ed79f2fa073df761b97817dd9a61fbb8599bfa91780c7a6663a6883e3466d45b2b53c109be0195383ae79
   languageName: node
   linkType: hard
 

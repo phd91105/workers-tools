@@ -3,8 +3,8 @@ main = "src/index.ts"
 compatibility_date = "2023-11-08"
 
 kv_namespaces = [
-  { binding = "FILE", id = "c32caa9c65e34198aea56fa2ea02d67f" },
-  { binding = "FS", id = "1b32939789c043b6ac2b3a4c4ca9d2f4" }
+  { binding = "FILE", id = "c32caa9c65e34198aea56fa2ea02d67f", preview_id = "455a43b75f634010873f6df4a07be149" },
+  { binding = "FS", id = "1b32939789c043b6ac2b3a4c4ca9d2f4", preview_id = "3950d9ee8fe345a7af678b8542fabf57" }
 ]
 
 ai = { binding = "AI" }

@@ -14,12 +14,12 @@ export async function search(keyword: string, env: Env) {
   if (dbData) return dbData;
 
   // Fetch film data from an external source.
-  const filmResponse = await handleApiRequest<FilmResponse>(
+  const filmResponse = await handleApiRequest<{ data: FilmResponse }>(
     fetch(thuvienhdUrl(keyword)),
   );
 
   if (filmResponse) {
-    await filmRepository.bulkCreate(filmResponse, cleanKeyword, env);
+    await filmRepository.bulkCreate(filmResponse.data, cleanKeyword, env);
   }
 
   return filmResponse;
