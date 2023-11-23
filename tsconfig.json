@@ -6,7 +6,7 @@
     "moduleResolution": "Node",
     "allowJs": false,
     "strict": true,
-    "sourceMap": false,
+    "sourceMap": true,
     "allowSyntheticDefaultImports": true,
     "typeRoots": ["node_modules"],
     "types": ["@cloudflare/workers-types"],

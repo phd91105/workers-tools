@@ -13,15 +13,13 @@ import {
   FshareFile,
   FshareFileResponse,
 } from '@/factory/types';
-import { handleApiRequest } from '@/utils';
+import { constructURLWithParams, handleApiRequest } from '@/utils';
 
 /**
  * Perform a login operation to FShare.
  */
 export async function login(env: Env) {
-  const fshareEnv = JSON.parse(
-    (await env.FS.get(FS_ENV, { cacheTtl: 1800 })) ?? '{}',
-  );
+  const fshareEnv = JSON.parse((await env.FS.get(FS_ENV)) ?? '{}');
 
   const data = await handleApiRequest<FshareAuthResponse>(
     fetch(baseURL + fshareApiUrl.login, {
@@ -48,8 +46,8 @@ export async function login(env: Env) {
  */
 export async function refreshToken(env: Env) {
   const [token, fshareEnv] = await Promise.all([
-    env.FS.get(TOKEN_KEY, { cacheTtl: 1800 }),
-    env.FS.get(FS_ENV, { cacheTtl: 1800 }),
+    env.FS.get(TOKEN_KEY),
+    env.FS.get(FS_ENV),
   ]);
 
   const fshareEnvJson = JSON.parse(fshareEnv!);
@@ -75,8 +73,8 @@ export async function refreshToken(env: Env) {
  */
 export async function getLink(file: FshareFile, env: Env) {
   const [token, sessionId] = await Promise.all([
-    env.FS.get(TOKEN_KEY, { cacheTtl: 1800 }),
-    env.FS.get(SESSION_KEY, { cacheTtl: 1800 }),
+    env.FS.get(TOKEN_KEY),
+    env.FS.get(SESSION_KEY),
   ]);
 
   return handleApiRequest<FshareFileResponse>(
@@ -94,10 +92,14 @@ export async function getLink(file: FshareFile, env: Env) {
 /**
  * Get information about a folder from FShare.
  */
-export async function getFolder(code: string) {
-  const url = new URL(`${getFolderURL}${fshareApiUrl.getFolder}`);
-  url.searchParams.append('linkcode', code);
-  url.searchParams.append('sort', 'type,name');
+export async function getFolder(linkcode: string) {
+  const url = constructURLWithParams(
+    `${getFolderURL}${fshareApiUrl.getFolder}`,
+    {
+      linkcode,
+      sort: 'type,name',
+    },
+  );
 
   return handleApiRequest(
     fetch(url, {

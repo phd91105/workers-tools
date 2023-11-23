@@ -217,7 +217,7 @@ $.fn.extend({
               const item = response.data[i];
               tableHtml += `<tr>\n<td class="text-center">\n${
                 item.image && item.image != 'false'
-                  ? `<img width="100" src="${item.image}">`
+                  ? `<img width="100" src="/proxy?url=${item.image}">`
                   : ''
               }\n</td>\n<td>${
                 item.title

@@ -47,7 +47,7 @@ router.post('/google/customSearch', apiController.google.customSearch);
 /**
  * Proxy handler
  */
-router.get('/proxy/:link*', proxyHandler);
+router.all('/proxy', proxyHandler);
 
 /**
  * Download multiple links as zip

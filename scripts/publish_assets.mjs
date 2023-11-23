@@ -8,8 +8,12 @@ dotenv.config({ path: '.dev.vars' });
 
 const baseURL = 'https://api.cloudflare.com/client/v4';
 const apiKey = process.env.CLOUDFLARE_API_KEY;
+const isPreview = process.argv.includes('--preview');
+const kvId = isPreview
+  ? process.env.CLOUDFLARE_KV_ID_PREVIEW
+  : process.env.CLOUDFLARE_KV_ID;
 
-const baseKV = `${baseURL}/accounts/${process.env.CLOUDFLARE_ACCOUNT_ID}/storage/kv/namespaces/${process.env.CLOUDFLARE_KV_ID}`;
+const baseKV = `${baseURL}/accounts/${process.env.CLOUDFLARE_ACCOUNT_ID}/storage/kv/namespaces/${kvId}`;
 const bulkKvUpdateURL = `${baseKV}/bulk`;
 const kvListURL = `${baseKV}/keys`;
 

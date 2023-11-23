@@ -37,6 +37,8 @@ export const determineContentType = (path: string) => {
     return 'application/zip';
   } else if (path.endsWith('_gen.png')) {
     return 'image/png';
+  } else if (path.endsWith('.ico')) {
+    return 'image/vnd.microsoft.icon';
   }
   // Add more content types as needed
   return 'text/plain';

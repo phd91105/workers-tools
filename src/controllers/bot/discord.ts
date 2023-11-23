@@ -6,7 +6,11 @@ import Papa from 'papaparse';
 
 import { commonHeaders, githubUrl } from '@/contants';
 import { Env } from '@/factory/types';
-import { handleApiRequest, verifyDiscordRequest } from '@/utils';
+import {
+  constructURLWithParams,
+  handleApiRequest,
+  verifyDiscordRequest,
+} from '@/utils';
 
 import { filterCommit } from './modules/cherryPick';
 
@@ -94,9 +98,10 @@ export const getCsvData = async (fileUrl: string) => {
 };
 
 export const getCommitData = async (context: Context<Env>, repo: string) => {
-  const url = new URL(githubUrl(context.env.OWNER, repo));
-  url.searchParams.append('sha', 'develop');
-  url.searchParams.append('per_page', '100');
+  const url = constructURLWithParams(githubUrl(context.env.OWNER, repo), {
+    sha: 'develop',
+    per_page: 100,
+  });
 
   const data = await handleApiRequest(
     fetch(url, {
