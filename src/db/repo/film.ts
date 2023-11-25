@@ -57,11 +57,14 @@ export async function findAll(cleanKeyword: string, env: Env) {
  * Bulk create films and their details in the database.
  */
 export async function bulkCreate(
-  data: FilmResponse,
+  filmResponse: FilmResponse,
   cleanKeyword: string,
   env: Env,
 ) {
-  const { values, detailValues } = processInsertValues(data, cleanKeyword);
+  const { values, detailValues } = processInsertValues(
+    filmResponse,
+    cleanKeyword,
+  );
 
   await Promise.all([
     env.DB.exec(
@@ -85,19 +88,19 @@ export async function bulkCreate(
  * Process insert values for bulk creation in the database.
  */
 export const processInsertValues = (
-  data: FilmResponse,
+  filmResponse: FilmResponse,
   cleanKeyword: string,
 ) => {
-  const values = data
-    .map(
+  const values = filmResponse
+    .data!.map(
       ({ id, image, title }) =>
         `('${id}', '${image}', '${removeQuote(title)}', '${removeDiacritics(
           title,
         )}__${cleanKeyword}')`,
     )
     .join(',');
-  const filmDetails = data
-    .map(({ links, id }) =>
+  const filmDetails = filmResponse
+    .data!.map(({ links, id }) =>
       links.map(({ title, link }) => ({ title, link, film_id: id })),
     )
     .flat();

@@ -1,9 +1,12 @@
-export type FilmResponse = Array<{
-  id: string;
-  image: string;
-  title: string;
-  links: Array<{
+export type FilmResponse = {
+  status: string;
+  data?: Array<{
+    id: string;
+    image: string;
     title: string;
-    link: string;
+    links: Array<{
+      title: string;
+      link: string;
+    }>;
   }>;
-}>;
+};

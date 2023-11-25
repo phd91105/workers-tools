@@ -14,6 +14,8 @@ export async function search(context: ContextWithBody<Env>, next: Next) {
     );
     return Response.json(response, { headers: context.headers });
   } catch (error) {
+    console.log(error);
+
     context.state.error = error;
 
     return next();
