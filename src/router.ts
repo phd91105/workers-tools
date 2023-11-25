@@ -7,6 +7,7 @@ import {
   errorHandler,
   handleCors,
   proxyHandler,
+  verifyDiscordRequest,
 } from '@/middlewares';
 
 const router = new Router<Env>();
@@ -57,7 +58,7 @@ router.post('/getZipped', apiController.zip.getZipped);
 /**
  * Discord bot webhooks
  */
-router.post('/interactions', botController.discord);
+router.post('/interactions', verifyDiscordRequest, botController.discord);
 
 /**
  * Stable diffusion

@@ -7,18 +7,13 @@ import { Base64Utils, determineContentType } from '@/utils';
  * Public asset files Handler
  */
 export const assetHandler = async (context: Context<Env>, next: Next) => {
-  if (context.request.method === 'OPTIONS') {
+  const path = context.params['0'];
+  if (context.request.method === 'OPTIONS' || !path.includes('.')) {
     return next();
   }
 
   try {
-    const path = context.params['0'];
-    const cacheTtl =
-      path.endsWith('.zip') || path.endsWith('_gen.png') ? undefined : 1800;
-
-    let file: string | Blob | null = await context.env.FILE.get(path, {
-      cacheTtl,
-    });
+    let file: string | Blob | null = await context.env.FILE.get(path);
 
     if (!file) throw new Error('NOT_FOUND');
 

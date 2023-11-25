@@ -1,3 +1,5 @@
+import isNil from 'lodash/isNil';
+
 /**
  * Remove accents from Vietnamese characters
  */
@@ -137,3 +139,39 @@ export function jsonToAsciiTable(json: JsonArray): string {
   // Combine all parts to form the ASCII table
   return `${headerRow}\n${header}\n${dividerRow}\n${dataRows}\n${headerRow}`;
 }
+
+export const truncateUtf8 = (str: string, n: number) => {
+  let l = 0;
+  let r = '';
+  for (let i = 0; i < str.length; i++) {
+    const c = str.charCodeAt(i);
+    if (
+      (c >= 0x0 && c < 0x81) ||
+      c === 0xf8f0 ||
+      (c >= 0xff61 && c < 0xffa0) ||
+      (c >= 0xf8f1 && c < 0xf8f4)
+    ) {
+      l += 1;
+    } else {
+      l += 2;
+    }
+    if (l <= n) {
+      r = r.concat(str[i]);
+    }
+  }
+  return r;
+};
+
+export const truncate2byte = (s: string, n: number) => {
+  if (!isNil(s)) {
+    const r = truncateUtf8(s.toString(), n);
+
+    if (r.length !== s.toString().length) {
+      return `${r}...`;
+    } else {
+      return r;
+    }
+  }
+
+  return s;
+};
