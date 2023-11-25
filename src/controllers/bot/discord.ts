@@ -8,7 +8,7 @@ import { commonHeaders, githubUrl } from '@/contants';
 import { Env } from '@/factory/types';
 import {
   constructURLWithParams,
-  handleApiRequest,
+  requestApi,
   verifyDiscordRequest,
 } from '@/utils';
 
@@ -103,15 +103,13 @@ export const getCommitData = async (context: Context<Env>, repo: string) => {
     per_page: 100,
   });
 
-  const data = await handleApiRequest(
-    fetch(url, {
-      headers: {
-        ...context.headers,
-        ...commonHeaders(),
-        Authorization: `Bearer ${context.env.GIT_TOKEN}`,
-      },
-    }),
-  );
+  const data = await requestApi(url, {
+    headers: {
+      ...context.headers,
+      ...commonHeaders(),
+      Authorization: `Bearer ${context.env.GIT_TOKEN}`,
+    },
+  });
 
   return data;
 };

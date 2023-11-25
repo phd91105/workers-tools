@@ -1,11 +1,12 @@
 /**
  * Helper function to handle API requests and error logging.
  */
-export async function handleApiRequest<T>(
-  request: Promise<Response>,
+export async function requestApi<T>(
+  input: RequestInfo,
+  init?: RequestInit<CfProperties>,
 ): Promise<T> {
   try {
-    const response = await request;
+    const response = await fetch(input, init);
 
     return await response.json();
   } catch (error) {

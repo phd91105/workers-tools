@@ -1,7 +1,7 @@
 import { thuvienhdUrl } from '@/contants';
 import { filmRepository } from '@/db/repo';
 import { Env, FilmResponse } from '@/factory/types';
-import { handleApiRequest, removeDiacritics } from '@/utils';
+import { removeDiacritics, requestApi } from '@/utils';
 
 /**
  * Search for films based on a keyword.
@@ -14,8 +14,8 @@ export async function search(keyword: string, env: Env) {
   if (dbData) return dbData;
 
   // Fetch film data from an external source.
-  const filmResponse = await handleApiRequest<{ data: FilmResponse }>(
-    fetch(thuvienhdUrl(keyword)),
+  const filmResponse = await requestApi<{ data: FilmResponse }>(
+    thuvienhdUrl(keyword),
   );
 
   if (filmResponse) {

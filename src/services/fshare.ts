@@ -13,24 +13,26 @@ import {
   FshareFile,
   FshareFileResponse,
 } from '@/factory/types';
-import { constructURLWithParams, handleApiRequest } from '@/utils';
+import { constructURLWithParams, requestApi } from '@/utils';
 
 /**
  * Perform a login operation to FShare.
  */
 export async function login(env: Env) {
-  const fshareEnv = JSON.parse((await env.FS.get(FS_ENV)) ?? '{}');
+  const fshareEnv = await env.FS.get(FS_ENV);
+  const fshareEnvJson = JSON.parse(fshareEnv!);
 
-  const data = await handleApiRequest<FshareAuthResponse>(
-    fetch(baseURL + fshareApiUrl.login, {
+  const data = await requestApi<FshareAuthResponse>(
+    baseURL + fshareApiUrl.login,
+    {
       method: 'post',
       body: JSON.stringify({
-        user_email: fshareEnv.EMAIL,
-        password: fshareEnv.PASSWORD,
-        app_key: fshareEnv.APP_KEY,
+        user_email: fshareEnvJson.EMAIL,
+        password: fshareEnvJson.PASSWORD,
+        app_key: fshareEnvJson.APP_KEY,
       }),
-      headers: commonHeaders(fshareEnv.USER_AGENT),
-    }),
+      headers: commonHeaders(fshareEnvJson.USER_AGENT),
+    },
   );
 
   await Promise.all([
@@ -52,12 +54,13 @@ export async function refreshToken(env: Env) {
 
   const fshareEnvJson = JSON.parse(fshareEnv!);
 
-  const data = await handleApiRequest<FshareAuthResponse>(
-    fetch(baseURL + fshareApiUrl.refreshToken, {
+  const data = await requestApi<FshareAuthResponse>(
+    baseURL + fshareApiUrl.refreshToken,
+    {
       method: 'post',
       body: JSON.stringify({ token, app_key: fshareEnvJson.APP_KEY }),
       headers: commonHeaders(fshareEnvJson.USER_AGENT),
-    }),
+    },
   );
 
   await Promise.all([
@@ -77,16 +80,14 @@ export async function getLink(file: FshareFile, env: Env) {
     env.FS.get(SESSION_KEY),
   ]);
 
-  return handleApiRequest<FshareFileResponse>(
-    fetch(baseURL + fshareApiUrl.download, {
-      method: 'post',
-      body: JSON.stringify({ ...file, token, zipflag: 0 }),
-      headers: {
-        ...commonHeaders(),
-        Cookie: `session_id=${sessionId}`,
-      },
-    }),
-  );
+  return requestApi<FshareFileResponse>(baseURL + fshareApiUrl.download, {
+    method: 'post',
+    body: JSON.stringify({ ...file, token, zipflag: 0 }),
+    headers: {
+      ...commonHeaders(),
+      Cookie: `session_id=${sessionId}`,
+    },
+  });
 }
 
 /**
@@ -101,9 +102,7 @@ export async function getFolder(linkcode: string) {
     },
   );
 
-  return handleApiRequest(
-    fetch(url, {
-      headers: { ...commonHeaders() },
-    }),
-  );
+  return requestApi(url, {
+    headers: { ...commonHeaders() },
+  });
 }
