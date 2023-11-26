@@ -12,10 +12,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cloudflare/ai@npm:^1.0.32":
-  version: 1.0.32
-  resolution: "@cloudflare/ai@npm:1.0.32"
-  checksum: db87717376a0a944e36874876e0a19f1102bdab223fdbd2b154b9c292d6a0dc46b7f99855c5b1b7831cef88a89314abf84e270c6bb737054378cb52943d565a0
+"@cloudflare/ai@npm:^1.0.33":
+  version: 1.0.33
+  resolution: "@cloudflare/ai@npm:1.0.33"
+  checksum: fe60f1f0d252dd3dd0d79d1212a34e91e977d70c3843c65ac2755327d5c24fb3d051ffeb68c0650c456da1b2a996ad14f52e7129032b0cb4d2b41592407275b2
   languageName: node
   linkType: hard
 
@@ -3717,7 +3717,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "tools@workspace:."
   dependencies:
-    "@cloudflare/ai": "npm:^1.0.32"
+    "@cloudflare/ai": "npm:^1.0.33"
     "@cloudflare/workers-types": "npm:^4.20231121.0"
     "@types/lodash": "npm:^4.14.202"
     "@types/papaparse": "npm:^5.3.13"

@@ -1,5 +1,6 @@
 import { ContextWithBody, Next } from 'cloudworker-router';
 
+import { NEED_REFRESH } from '@/contants';
 import { Env } from '@/factory/types';
 import { filmServices } from '@/services';
 
@@ -12,10 +13,15 @@ export async function search(context: ContextWithBody<Env>, next: Next) {
       context.body.filmName,
       context.env,
     );
+
+    if (response.status === NEED_REFRESH) {
+      context.event.waitUntil(
+        filmServices.search(context.body.filmName, context.env, false),
+      );
+    }
+
     return Response.json(response, { headers: context.headers });
   } catch (error) {
-    console.log(error);
-
     context.state.error = error;
 
     return next();

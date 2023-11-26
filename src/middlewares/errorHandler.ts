@@ -26,5 +26,7 @@ export const errorHandler = async (context: Context<Env>) => {
   const { error } = context.state;
   const { code, message } = getStatus(error.message);
 
+  console.log(error);
+
   return Response.json({ error: message }, { status: code });
 };

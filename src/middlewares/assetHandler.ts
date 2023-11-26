@@ -19,10 +19,12 @@ export const assetHandler = async (context: Context<Env>, next: Next) => {
 
     if (path.endsWith('.zip')) {
       file = Base64Utils.base64ToBlob(file, 'application/zip');
-      await context.env.FILE.delete(path);
+
+      context.event.waitUntil(context.env.FILE.delete(path));
     } else if (path.endsWith('_gen.png')) {
       file = Base64Utils.base64ToBlob(file, 'image/png');
-      await context.env.FILE.delete(path);
+
+      context.event.waitUntil(context.env.FILE.delete(path));
     }
 
     return new Response(file, {

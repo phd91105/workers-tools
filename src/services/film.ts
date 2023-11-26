@@ -6,12 +6,14 @@ import { removeDiacritics, requestApi } from '@/utils';
 /**
  * Search for films based on a keyword.
  */
-export async function search(keyword: string, env: Env) {
+export async function search(keyword: string, env: Env, findDb = true) {
   const cleanKeyword = removeDiacritics(keyword);
 
-  // Attempt to find films in the database.
-  const dbData = await filmRepository.findAll(cleanKeyword, env);
-  if (dbData) return dbData;
+  if (findDb) {
+    // Attempt to find films in the database.
+    const dbData = await filmRepository.findAll(cleanKeyword, env);
+    if (dbData) return dbData;
+  }
 
   // Fetch film data from an external source.
   const filmResponse = await requestApi<FilmResponse>(thuvienhdUrl(keyword));

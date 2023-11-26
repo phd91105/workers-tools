@@ -7,12 +7,11 @@ import { requestApi } from '@/utils';
 export async function customSearch(keyword: string, start?: number) {
   try {
     const data = await requestApi<{ [key: string]: string }>(
-      fetch(googleCustomSearch(keyword, start)),
+      googleCustomSearch(keyword, start),
     );
 
     return data.items ?? [];
   } catch (error) {
-    console.error(error);
     return [];
   }
 }

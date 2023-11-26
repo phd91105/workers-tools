@@ -1,3 +1,4 @@
+import { NEED_REFRESH, SUCCESS } from '@/contants';
 import { Env, FilmResponse } from '@/factory/types';
 import {
   buildInsertOrUpdateQuery,
@@ -20,16 +21,15 @@ export async function findAll(cleanKeyword: string, env: Env) {
     .bind(`%${cleanKeyword}%`)
     .all();
 
-  // const oldKey = films.map(({ search_text }) =>
-  //   String(search_text).split('__').pop(),
-  // );
+  const oldKey = films.map(({ search_text }) =>
+    String(search_text).split('__').pop(),
+  );
 
-  // const needRefresh = oldKey.some(
-  //   (value) => value!.length > cleanKeyword.length && cleanKeyword.length > 4,
-  // );
-  const needRefresh = false;
+  const needRefresh = oldKey.some(
+    (value) => value!.length > cleanKeyword.length && cleanKeyword.length > 4,
+  );
 
-  if (needRefresh || films.length === 0) return null;
+  if (!films.length) return null;
 
   const filmIds = films.map((item) => item.id);
   const { results: filmDetail } = await env.DB.prepare(
@@ -48,9 +48,7 @@ export async function findAll(cleanKeyword: string, env: Env) {
     };
   });
 
-  const result = { status: 'success', data };
-
-  return result;
+  return { status: needRefresh ? NEED_REFRESH : SUCCESS, data };
 }
 
 /**
