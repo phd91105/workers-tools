@@ -4,8 +4,8 @@ export const TOKEN_KEY = 'accessToken';
 export const SESSION_KEY = 'sessionId';
 export const FS_ENV = 'FS_ENV';
 
-export const NEED_REFRESH = Symbol('NEED_REFRESH');
-export const SUCCESS = Symbol('SUCCESS');
+export const NEED_REFRESH = 'NEED_REFRESH';
+export const SUCCESS = 'SUCCESS';
 
 export const fshareApiUrl = {
   login: 'user/login',

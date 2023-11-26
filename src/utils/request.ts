@@ -4,11 +4,13 @@
 export async function requestApi<T>(
   input: RequestInfo,
   init?: RequestInit<CfProperties>,
+  responseType: 'json' | 'text' = 'json',
 ): Promise<T> {
   try {
     const response = await fetch(input, init);
+    const data = await response[responseType]();
 
-    return await response.json();
+    return <T>data;
   } catch (error) {
     console.error('Unexpected error:', error);
 

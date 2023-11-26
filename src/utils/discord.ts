@@ -10,6 +10,8 @@ export function createEmbed(
     committer: string;
     sha: string;
   }[],
+  from: string,
+  to: string,
   color?: number,
 ) {
   const listMsg = map(
@@ -52,10 +54,25 @@ export function createEmbed(
       },
     ],
     footer: {
-      text: 'git cherry-pick ' + map(commit, 'sha').reverse().join(' '),
+      text: `Commits from ${from.split('T')[0]} to ${to.split('T')[0]}`,
     },
     color,
   };
 
-  return embed;
+  const cmd = {
+    fields: [
+      {
+        name: 'Command',
+        value:
+          '```\n' +
+          'git cherry-pick ' +
+          map(commit, 'sha').reverse().join(' ') +
+          '\n```',
+        inline: true,
+      },
+    ],
+    color,
+  };
+
+  return [embed, cmd];
 }

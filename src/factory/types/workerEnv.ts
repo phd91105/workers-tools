@@ -9,8 +9,6 @@ export type Env = {
   DISCORD_TOKEN: string;
   OWNER: string;
   GIT_TOKEN: string;
-  API_REPO: string;
-  FRONT_REPO: string;
-  BATCH_REPO: string;
+  REPOS: string;
   AI: Ai;
 };

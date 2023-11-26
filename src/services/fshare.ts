@@ -6,7 +6,7 @@ import {
   getFolderURL,
   SESSION_KEY,
   TOKEN_KEY,
-} from '@/contants';
+} from '@/constants';
 import {
   Env,
   FshareAuthResponse,

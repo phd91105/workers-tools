@@ -1,4 +1,4 @@
-import { thuvienhdUrl } from '@/contants';
+import { thuvienhdUrl } from '@/constants';
 import { filmRepository } from '@/db/repo';
 import { Env, FilmResponse } from '@/factory/types';
 import { removeDiacritics, requestApi } from '@/utils';

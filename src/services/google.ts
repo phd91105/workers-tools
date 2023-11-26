@@ -1,4 +1,4 @@
-import { googleCustomSearch } from '@/contants';
+import { googleCustomSearch } from '@/constants';
 import { requestApi } from '@/utils';
 
 /**

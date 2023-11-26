@@ -1,4 +1,4 @@
-import { NEED_REFRESH, SUCCESS } from '@/contants';
+import { NEED_REFRESH, SUCCESS } from '@/constants';
 import { Env, FilmResponse } from '@/factory/types';
 import {
   buildInsertOrUpdateQuery,
