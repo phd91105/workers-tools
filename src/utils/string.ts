@@ -92,54 +92,9 @@ export const getCurrentDateTime = () => {
   return `${year}${month}${day}${hours}${minutes}${seconds}${msSeconds}`;
 };
 
-type JsonArray = { [key: string]: string }[];
-
-// Function to convert JSON array to ASCII Table
-export function jsonToAsciiTable(json: JsonArray): string {
-  // Calculate column widths
-  const colWidths: { [key: string]: number } = {};
-  json.forEach((row) => {
-    Object.keys(row).forEach((col) => {
-      colWidths[col] = Math.max(
-        colWidths[col] || 0,
-        row[col].length,
-        col.length,
-      );
-    });
-  });
-
-  // Create the top row of the table
-  const headerRow =
-    '+-' +
-    Object.keys(colWidths)
-      .map((col) => '-'.repeat(colWidths[col]))
-      .join('-+-') +
-    '-+';
-  const header =
-    '| ' +
-    Object.keys(colWidths)
-      .map((col) => col.padEnd(colWidths[col], ' '))
-      .join(' | ') +
-    ' |';
-  const dividerRow = headerRow;
-
-  // Create data rows
-  const dataRows = json
-    .map((row) => {
-      return (
-        '| ' +
-        Object.keys(colWidths)
-          .map((col) => (row[col] || '').padEnd(colWidths[col], ' '))
-          .join(' | ') +
-        ' |'
-      );
-    })
-    .join(`\n${dividerRow}\n`);
-
-  // Combine all parts to form the ASCII table
-  return `${headerRow}\n${header}\n${dividerRow}\n${dataRows}\n${headerRow}`;
-}
-
+/**
+ * truncateUtf8
+ */
 export const truncateUtf8 = (str: string, n: number) => {
   let l = 0;
   let r = '';
@@ -162,6 +117,9 @@ export const truncateUtf8 = (str: string, n: number) => {
   return r;
 };
 
+/**
+ * truncate2byte
+ */
 export const truncate2byte = (s: string, n: number) => {
   if (!isNil(s)) {
     const r = truncateUtf8(s.toString(), n);
@@ -176,6 +134,9 @@ export const truncate2byte = (s: string, n: number) => {
   return s;
 };
 
+/**
+ * findMinMaxDates
+ */
 export function findMinMaxDates(dates: string[]) {
   const parseDate = (dateStr: string) => {
     const [datePart, timePart] = dateStr.split(' ');

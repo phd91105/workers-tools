@@ -1,7 +1,7 @@
 import { Ai } from '@cloudflare/ai';
-import { ContextWithBody, Next } from 'cloudworker-router';
+import type { ContextWithBody, Next } from 'cloudworker-router';
 
-import { Env } from '@/factory/types';
+import type { Env } from '@/factory/types';
 import { Base64Utils, removeDiacritics } from '@/utils';
 
 export async function genImage(context: ContextWithBody<Env>, next: Next) {

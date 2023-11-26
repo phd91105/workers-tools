@@ -1,5 +1,5 @@
-import { ContextWithBody } from 'cloudworker-router';
-import { InteractionResponseType } from 'discord-interactions';
+import type { ContextWithBody } from 'cloudworker-router';
+import { InteractionResponseType } from 'discord-api-types/v10';
 import compact from 'lodash/compact';
 import flatMap from 'lodash/flatMap';
 import isEmpty from 'lodash/isEmpty';
@@ -8,7 +8,7 @@ import map from 'lodash/map';
 import split from 'lodash/split';
 import trim from 'lodash/trim';
 
-import { Env } from '@/factory/types';
+import type { Env } from '@/factory/types';
 import { createEmbed, findMinMaxDates } from '@/utils';
 
 import { getCommitsDataForRepos, getCsvData } from './helpers';
@@ -46,11 +46,10 @@ export const cherryPick = async (context: ContextWithBody<Env>) => {
         }
       }),
     ),
-    (item) => item,
   );
 
   return Response.json({
-    type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+    type: InteractionResponseType.ChannelMessageWithSource,
     data: {
       content: null,
       embeds: embedList,

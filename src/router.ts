@@ -1,7 +1,7 @@
 import { bodyparser, Router } from 'cloudworker-router';
 
 import { apiController, botController, webController } from '@/controllers';
-import { Env } from '@/factory/types';
+import type { Env } from '@/factory/types';
 import {
   assetHandler,
   errorHandler,

@@ -1,7 +1,7 @@
-import { Context } from 'cloudworker-router';
+import type { Context } from 'cloudworker-router';
 
 import { HttpStatus } from '@/factory/enums';
-import { Env } from '@/factory/types';
+import type { Env } from '@/factory/types';
 
 /**
  * Extracts the HTTP status code from an error message.

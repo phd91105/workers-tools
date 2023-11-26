@@ -1,6 +1,6 @@
-import { ContextWithBody, Next } from 'cloudworker-router';
+import type { ContextWithBody, Next } from 'cloudworker-router';
 
-import { Env } from '@/factory/types';
+import type { Env } from '@/factory/types';
 import { zipServices } from '@/services';
 import { Base64Utils, getCurrentDateTime } from '@/utils';
 

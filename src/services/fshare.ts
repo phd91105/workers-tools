@@ -7,7 +7,7 @@ import {
   SESSION_KEY,
   TOKEN_KEY,
 } from '@/constants';
-import {
+import type {
   Env,
   FshareAuthResponse,
   FshareFile,

@@ -1119,12 +1119,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"discord-interactions@npm:^3.4.0":
-  version: 3.4.0
-  resolution: "discord-interactions@npm:3.4.0"
-  dependencies:
-    tweetnacl: "npm:^1.0.3"
-  checksum: e88fb69b77f8042726a3d9b152809a2f2fc9e38a324cc20bef82b65c143aa7403ace5aef66d267a64d6d29bc97c257bb226cce2dad147b053d99a528be33618c
+"discord-api-types@npm:^0.37.65":
+  version: 0.37.65
+  resolution: "discord-api-types@npm:0.37.65"
+  checksum: 4bb650463434efc10b1788500191edeefb0626cf682a9d49fcf094699d887f85b29ec439083672c9f79c9fcdc6d88c9974881ab28f65aac00b5aeaf0e01af855
   languageName: node
   linkType: hard
 
@@ -3724,7 +3722,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": "npm:^6.12.0"
     "@typescript-eslint/parser": "npm:^6.12.0"
     cloudworker-router: "npm:^4.1.5"
-    discord-interactions: "npm:^3.4.0"
+    discord-api-types: "npm:^0.37.65"
     dotenv: "npm:^16.3.1"
     eslint: "npm:^8.54.0"
     eslint-config-prettier: "npm:^9.0.0"
@@ -3766,13 +3764,6 @@ __metadata:
   version: 2.6.2
   resolution: "tslib@npm:2.6.2"
   checksum: e03a8a4271152c8b26604ed45535954c0a45296e32445b4b87f8a5abdb2421f40b59b4ca437c4346af0f28179780d604094eb64546bee2019d903d01c6c19bdb
-  languageName: node
-  linkType: hard
-
-"tweetnacl@npm:^1.0.3":
-  version: 1.0.3
-  resolution: "tweetnacl@npm:1.0.3"
-  checksum: 069d9df51e8ad4a89fbe6f9806c68e06c65be3c7d42f0701cc43dba5f0d6064686b238bbff206c5addef8854e3ce00c643bff59432ea2f2c639feab0ee1a93f9
   languageName: node
   linkType: hard
 

@@ -1,4 +1,4 @@
-import { Ai } from '@cloudflare/ai';
+import type { Ai } from '@cloudflare/ai';
 
 export type Env = {
   FS: KVNamespace<string>;

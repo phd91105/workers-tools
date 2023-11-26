@@ -1,8 +1,8 @@
 import { fsharePage } from '@views';
-import { Context } from 'cloudworker-router';
+import type { Context } from 'cloudworker-router';
 
 import { HttpStatus } from '@/factory/enums';
-import { Env } from '@/factory/types';
+import type { Env } from '@/factory/types';
 
 /**
  * Render the FShare index page.

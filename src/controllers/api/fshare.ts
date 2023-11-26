@@ -1,6 +1,6 @@
-import { ContextWithBody, Next } from 'cloudworker-router';
+import type { ContextWithBody, Next } from 'cloudworker-router';
 
-import { Env } from '@/factory/types';
+import type { Env } from '@/factory/types';
 import { fshareServices } from '@/services';
 
 /**

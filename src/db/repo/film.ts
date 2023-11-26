@@ -1,5 +1,5 @@
 import { NEED_REFRESH, SUCCESS } from '@/constants';
-import { Env, FilmResponse } from '@/factory/types';
+import type { Env, FilmResponse } from '@/factory/types';
 import {
   buildInsertOrUpdateQuery,
   buildSelectQuery,

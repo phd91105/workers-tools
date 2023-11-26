@@ -1,4 +1,4 @@
-import { Env } from '@/factory/types';
+import type { Env } from '@/factory/types';
 import router from '@/router';
 import { fshareServices } from '@/services';
 

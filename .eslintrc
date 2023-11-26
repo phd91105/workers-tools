@@ -34,6 +34,7 @@
     "no-fallthrough": "off",
     "no-useless-catch": "off",
     "unused-imports/no-unused-imports": "error",
+    "@typescript-eslint/consistent-type-imports": "error",
     "unused-imports/no-unused-vars": [
       "warn",
       {

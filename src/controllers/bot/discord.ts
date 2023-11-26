@@ -1,12 +1,12 @@
-import { ContextWithBody } from 'cloudworker-router';
-import { InteractionType } from 'discord-interactions';
+import type { ContextWithBody } from 'cloudworker-router';
+import { Utils } from 'discord-api-types/v10';
 
-import { Env } from '@/factory/types';
+import type { Env } from '@/factory/types';
 
-import { cherryPick } from './modules/cherryPick';
+import { cherryPick } from './commands/cherryPick';
 
 export const discord = async (context: ContextWithBody<Env>) => {
-  if (context.body.type === InteractionType.APPLICATION_COMMAND) {
+  if (Utils.isApplicationCommandGuildInteraction(context.body)) {
     switch (context.body.data.name.toLowerCase()) {
       case 'pick': {
         return await cherryPick(context);

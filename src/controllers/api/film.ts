@@ -1,7 +1,7 @@
-import { ContextWithBody, Next } from 'cloudworker-router';
+import type { ContextWithBody, Next } from 'cloudworker-router';
 
 import { NEED_REFRESH } from '@/constants';
-import { Env } from '@/factory/types';
+import type { Env } from '@/factory/types';
 import { filmServices } from '@/services';
 
 /**

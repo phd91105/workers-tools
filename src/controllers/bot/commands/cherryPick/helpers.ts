@@ -1,11 +1,11 @@
-import { ContextWithBody } from 'cloudworker-router';
+import type { ContextWithBody } from 'cloudworker-router';
 import filter from 'lodash/filter';
 import includes from 'lodash/includes';
 import map from 'lodash/map';
 import Papa from 'papaparse';
 
 import { commonHeaders, githubUrl } from '@/constants';
-import { CommitArray, Env } from '@/factory/types';
+import type { CommitArray, Env } from '@/factory/types';
 import { constructURLWithParams, requestApi } from '@/utils';
 
 export const getCsvData = async (fileUrl: string) => {

@@ -1,6 +1,6 @@
-import { Context, Next } from 'cloudworker-router';
+import type { Context, Next } from 'cloudworker-router';
 
-import { Env } from '@/factory/types';
+import type { Env } from '@/factory/types';
 import { Base64Utils, determineContentType } from '@/utils';
 
 /**
@@ -31,7 +31,7 @@ export const assetHandler = async (context: Context<Env>, next: Next) => {
       headers: {
         ...context.headers,
         'content-type': determineContentType(path),
-        'cache-control': 'max-age=2592000',
+        'cache-control': 'max-age=14400',
       },
     });
   } catch (error) {

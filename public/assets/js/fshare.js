@@ -274,10 +274,10 @@ $.fn.extend({
             }
 
             let ggTableHtml =
-              '<table class="table table-hover table-sm table-bordered">\n<thead class="thead-light text-center">\n<tr>\n<th>ID</th>\n<th>Type</th>\n<th>Name</th>\n<th></th>\n</tr>\n</thead>\n<tbody>';
+              '<table class="table table-hover table-sm table-bordered">\n<thead class="thead-light text-center">\n<tr>\n<th>Type</th>\n<th class="col-11">Name</th>\n<th class="col-1"></th>\n</tr>\n</thead>\n<tbody>';
             for (let i = 0; i < response.length; i++) {
               const ggItem = response[i];
-              ggTableHtml += `<tr>\n<th scope="row">${i + 1}</th>\n<td>${
+              ggTableHtml += `<tr>\n<td class="text-center">${
                 ggItem.link.includes('folder') ? 'Folder' : 'File'
               }</td>\n<td>${
                 ggItem.htmlTitle

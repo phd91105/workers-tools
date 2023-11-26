@@ -1,7 +1,7 @@
-import { Context, Next } from 'cloudworker-router';
+import type { Context, Next } from 'cloudworker-router';
 
 import { HttpStatus } from '@/factory/enums';
-import { Env } from '@/factory/types';
+import type { Env } from '@/factory/types';
 
 /**
  * Middleware to handle CORS in Cloudflare Workers.
