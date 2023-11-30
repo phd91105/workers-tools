@@ -54,7 +54,9 @@ export function createEmbed(
       },
     ],
     footer: {
-      text: `Commits from ${from.split('T')[0]} to ${to.split('T')[0]}`,
+      text: `Commits from ${from.split('T')[0].replaceAll('-', '/')} to ${to
+        .split('T')[0]
+        .replaceAll('-', '/')}`,
     },
     color,
   };
